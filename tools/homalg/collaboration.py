@@ -401,8 +401,6 @@ def submit(
             raise ValueError(
                 f"claim expired or held by another contributor: run homalg claim {key}"
             )
-    if hooks:
-        hooks.backup(repo)
     branch = client.git("branch", "--show-current").strip()
     if not branch or branch in {"main", "master"}:
         raise ValueError("Submit from a named work branch, not the default branch")
@@ -423,6 +421,9 @@ def submit(
     if dirty:
         client.git("add", "-A", "--", *paths)
         client.git("commit", "--only", "-m", f"work({key}): snapshot for submission", "--", *paths)
+    if hooks:
+        # Horizon commits to its ledger; back up the actual source snapshot too.
+        hooks.backup(repo)
     source = client.git("rev-parse", "HEAD").strip()
     base = client.git("merge-base", source, "origin/main").strip()
     requests = json.loads(

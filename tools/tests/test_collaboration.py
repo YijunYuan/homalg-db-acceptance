@@ -216,6 +216,73 @@ def test_fixture_named_article_cannot_use_no_claim(repository: Path) -> None:
         submit(repository, "Fixture2002", no_claim=True, client=FakeGh(repository))
 
 
+@pytest.mark.parametrize("backup_fails", [False, True])
+def test_submit_backs_up_dirty_source_before_publication(
+    repository: Path, backup_fails: bool
+) -> None:
+    """Real private Git receives the source snapshot; failed backup cannot publish."""
+    set_claim(repository)
+    source = repository / "HomAlg/Example2000/Thm_1.lean"
+    source.parent.mkdir(parents=True)
+    source.write_text("-- Previous source\n")
+    git(repository, "add", str(source))
+    git(repository, "commit", "-m", "Previous work")
+    latest = "-- Current scoped source from the session ledger\n"
+    source.write_text(latest)
+    private = repository.parent / "private.git"
+    git(repository, "init", "--bare", str(private))
+    events: list[str] = []
+
+    class OrderedClient(FakeGh):
+        def run(self, *args: str, **kwargs: Any) -> subprocess.CompletedProcess:
+            if len(args) > 2 and args[1:3] == ("-m", "homalg"):
+                # This regression tests Git ordering, not the separately tested Lean pipeline.
+                assert "backup" in events
+                return subprocess.CompletedProcess(args, 0, "Verified summary\n", "")
+            if args[:2] == ("git", "push") and "origin" in args[2:]:
+                assert "backup" in events
+                events.append("public-push")
+            return super().run(*args, **kwargs)
+
+        def gh(self, *args: str) -> str:
+            if args[:2] == ("pr", "create"):
+                assert "public-push" in events
+                events.append("pr")
+            return super().gh(*args)
+
+    class Hooks:
+        def ensure_idle(self, *_: Any) -> None:
+            assert source.read_text() == latest
+            assert git(repository, "show", "HEAD:HomAlg/Example2000/Thm_1.lean") != latest.strip()
+            events.append("idle")
+
+        def backup(self, repo: Path) -> None:
+            assert events == ["idle"]
+            git(repo, "push", str(private), "HEAD:refs/heads/backup/work")
+            assert (
+                git(private, "show", "backup/work:HomAlg/Example2000/Thm_1.lean") == latest.strip()
+            )
+            if backup_fails:
+                raise RuntimeError("Backup confirmation failed")
+            events.append("backup")
+
+        def export_logs(self, *_: Any) -> None:
+            pass
+
+        def publish_status(self, *_: Any) -> None:
+            pass
+
+    client = OrderedClient(repository)
+    if backup_fails:
+        with pytest.raises(RuntimeError, match="Backup confirmation failed"):
+            submit(repository, "Example2000", now=NOW, client=client, hooks=Hooks())
+        assert events == ["idle"]
+        assert not any(call[:2] == ("pr", "create") for call in client.calls)
+    else:
+        assert submit(repository, "Example2000", now=NOW, client=client, hooks=Hooks())["pr"]
+        assert events == ["idle", "backup", "public-push", "pr"]
+
+
 def test_owner_check_uses_newest_exact_head_review(repository: Path) -> None:
     """An approval of an older revision does not unlock a sensitive metadata change."""
     base = git(repository, "rev-parse", "HEAD")
