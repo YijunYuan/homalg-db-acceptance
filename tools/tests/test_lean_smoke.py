@@ -44,8 +44,8 @@ def parse_export(text: str) -> dict[str, dict[str, Any]]:
 
 @pytest.fixture(scope="module")
 def exports() -> dict[str, dict[str, dict[str, Any]]]:
-    """Compile the package once, then load each document root independently."""
-    run_lean("build", timeout=600)
+    """Compile the fixed samples, then load each document root independently."""
+    run_lean("build", "homalg-export", "HomAlg.Fixture2000", "HomAlg.Fixture2001", timeout=600)
     return {
         doc: parse_export(
             run_lean("exe", "homalg-export", "--root", f"HomAlg.{doc}", "--prefix", f"HomAlg.{doc}")
