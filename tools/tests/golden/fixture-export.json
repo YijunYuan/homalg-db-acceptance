@@ -23,7 +23,7 @@
   },
   "generator": {
     "name": "homalg-export",
-    "version": "2"
+    "version": "3"
   },
   "mathlib_rev": "v4.35.0",
   "modules": [
@@ -46,7 +46,7 @@
           "name": "Fixture2000.aux_add_zero",
           "packaged_fields": [],
           "transitive_sorry": false,
-          "type": "∀ (n : ℕ), n + 0 = n",
+          "type": "∀ (n : Nat), Eq.{1} (HAdd.hAdd.{0, 0, 0} n (OfNat.ofNat.{0} 0)) n",
           "type_hash": "000000002aea8c3d",
           "type_uses_external": [
             "Eq",
@@ -86,7 +86,7 @@
           "name": "Fixture2000.differential_comp_zero",
           "packaged_fields": [],
           "transitive_sorry": false,
-          "type": "∀ (c : Fixture2000.ChainComplexToy) (n : ℕ), c.differential n ∘ c.differential (n + 1) = fun x ↦ 0",
+          "type": "∀ (c : Fixture2000.ChainComplexToy) (n : Nat),\n  Eq.{1}\n    (Function.comp.{1, 1, 1} (Fixture2000.ChainComplexToy.differential c n)\n      (Fixture2000.ChainComplexToy.differential c (HAdd.hAdd.{0, 0, 0} n (OfNat.ofNat.{0} 1))))\n    fun x ↦ OfNat.ofNat.{0} 0",
           "type_hash": "00000000d461a9fb",
           "type_uses_external": [
             "Eq",
@@ -135,7 +135,7 @@
           "name": "Fixture2000.cited_mul_comm",
           "packaged_fields": [],
           "transitive_sorry": true,
-          "type": "∀ (m n : ℕ), m * n = n * m",
+          "type": "∀ (m n : Nat), Eq.{1} (HMul.hMul.{0, 0, 0} m n) (HMul.hMul.{0, 0, 0} n m)",
           "type_hash": "00000000799bc5cd",
           "type_uses_external": [
             "Eq",
@@ -209,7 +209,7 @@
           "meaning_hash": "92c01a56001fedac",
           "name": "Fixture2000.ChainComplexToy.degree",
           "transitive_sorry": false,
-          "type": "Fixture2000.ChainComplexToy → ℕ",
+          "type": "Fixture2000.ChainComplexToy → Nat",
           "type_hash": "000000009a5e3843",
           "type_uses_external": [
             "Nat"
@@ -231,7 +231,7 @@
           "meaning_hash": "1dad628aa996345c",
           "name": "Fixture2000.ChainComplexToy.differential",
           "transitive_sorry": false,
-          "type": "Fixture2000.ChainComplexToy → ℕ → ℕ → ℕ",
+          "type": "Fixture2000.ChainComplexToy → Nat → Nat → Nat",
           "type_hash": "000000008a1f3d93",
           "type_uses_external": [
             "Nat"
@@ -254,7 +254,7 @@
           "name": "Fixture2000.ChainComplexToy.differential_zero",
           "packaged_fields": [],
           "transitive_sorry": false,
-          "type": "∀ (self : Fixture2000.ChainComplexToy) (n : ℕ), self.differential n 0 = 0",
+          "type": "∀ (self : Fixture2000.ChainComplexToy) (n : Nat),\n  Eq.{1} (Fixture2000.ChainComplexToy.differential self n (OfNat.ofNat.{0} 0)) (OfNat.ofNat.{0} 0)",
           "type_hash": "00000000ed263158",
           "type_uses_external": [
             "Eq",
@@ -279,7 +279,7 @@
           "meaning_hash": "7a023fc5b0a83058",
           "name": "Fixture2000.ChainComplexToy.mk",
           "transitive_sorry": false,
-          "type": "ℕ →\n  (differential : ℕ → ℕ → ℕ) →\n    (∀ (n : ℕ), differential n 0 = 0) →\n      (∀ (n x : ℕ), differential n (differential (n + 1) x) = 0) → Fixture2000.ChainComplexToy",
+          "type": "Nat →\n  (differential : Nat → Nat → Nat) →\n    (∀ (n : Nat), Eq.{1} (differential n (OfNat.ofNat.{0} 0)) (OfNat.ofNat.{0} 0)) →\n      (∀ (n x : Nat),\n          Eq.{1} (differential n (differential (HAdd.hAdd.{0, 0, 0} n (OfNat.ofNat.{0} 1)) x))\n            (OfNat.ofNat.{0} 0)) →\n        Fixture2000.ChainComplexToy",
           "type_hash": "0000000073aff057",
           "type_uses_external": [
             "Eq",
@@ -308,7 +308,7 @@
           "name": "Fixture2000.ChainComplexToy.square_zero",
           "packaged_fields": [],
           "transitive_sorry": false,
-          "type": "∀ (self : Fixture2000.ChainComplexToy) (n x : ℕ),\n  self.differential n (self.differential (n + 1) x) = 0",
+          "type": "∀ (self : Fixture2000.ChainComplexToy) (n x : Nat),\n  Eq.{1}\n    (Fixture2000.ChainComplexToy.differential self n\n      (Fixture2000.ChainComplexToy.differential self (HAdd.hAdd.{0, 0, 0} n (OfNat.ofNat.{0} 1)) x))\n    (OfNat.ofNat.{0} 0)",
           "type_hash": "00000000c51474e9",
           "type_uses_external": [
             "Eq",
@@ -407,7 +407,7 @@
           "name": "Fixture2000.degree_le_mul_one",
           "packaged_fields": [],
           "transitive_sorry": true,
-          "type": "∀ (c : Fixture2000.ChainComplexToy), c.degree ≤ c.degree * 1",
+          "type": "∀ (c : Fixture2000.ChainComplexToy),\n  LE.le.{0} (Fixture2000.ChainComplexToy.degree c)\n    (HMul.hMul.{0, 0, 0} (Fixture2000.ChainComplexToy.degree c) (OfNat.ofNat.{0} 1))",
           "type_hash": "000000009752e415",
           "type_uses_external": [
             "HMul.hMul",
@@ -460,7 +460,7 @@
           "name": "Fixture2000.add_zero_natural",
           "packaged_fields": [],
           "transitive_sorry": false,
-          "type": "∀ (n : ℕ), n + 0 = n",
+          "type": "∀ (n : Nat), Eq.{1} (HAdd.hAdd.{0, 0, 0} n (OfNat.ofNat.{0} 0)) n",
           "type_hash": "000000002aea8c3d",
           "type_uses_external": [
             "Eq",
@@ -500,7 +500,7 @@
           "name": "Fixture2000.degree_positive",
           "packaged_fields": [],
           "transitive_sorry": true,
-          "type": "∀ (c : Fixture2000.ChainComplexToy), 0 < c.degree",
+          "type": "∀ (c : Fixture2000.ChainComplexToy),\n  LT.lt.{0} (OfNat.ofNat.{0} 0) (Fixture2000.ChainComplexToy.degree c)",
           "type_hash": "00000000d0bf2ef0",
           "type_uses_external": [
             "LT.lt",
@@ -549,7 +549,7 @@
           "name": "Fixture2000.degree_self_disputed",
           "packaged_fields": [],
           "transitive_sorry": true,
-          "type": "∀ (c : Fixture2000.ChainComplexToy), c.degree = c.degree",
+          "type": "∀ (c : Fixture2000.ChainComplexToy),\n  Eq.{1} (Fixture2000.ChainComplexToy.degree c) (Fixture2000.ChainComplexToy.degree c)",
           "type_hash": "000000008b8031e5",
           "type_uses_external": [
             "Eq",
@@ -597,7 +597,7 @@
           "name": "Fixture2000.degree_add_zero",
           "packaged_fields": [],
           "transitive_sorry": false,
-          "type": "∀ (c : Fixture2000.ChainComplexToy), c.degree + 0 = c.degree",
+          "type": "∀ (c : Fixture2000.ChainComplexToy),\n  Eq.{1} (HAdd.hAdd.{0, 0, 0} (Fixture2000.ChainComplexToy.degree c) (OfNat.ofNat.{0} 0))\n    (Fixture2000.ChainComplexToy.degree c)",
           "type_hash": "00000000dd7940ca",
           "type_uses_external": [
             "Eq",
@@ -630,7 +630,7 @@
           "name": "Fixture2000.eq_degree_zero",
           "packaged_fields": [],
           "transitive_sorry": false,
-          "type": "∀ (c : Fixture2000.ChainComplexToy), c.degree = 0 → c.degree + 0 = 0",
+          "type": "∀ (c : Fixture2000.ChainComplexToy),\n  Eq.{1} (Fixture2000.ChainComplexToy.degree c) (OfNat.ofNat.{0} 0) →\n    Eq.{1} (HAdd.hAdd.{0, 0, 0} (Fixture2000.ChainComplexToy.degree c) (OfNat.ofNat.{0} 0))\n      (OfNat.ofNat.{0} 0)",
           "type_hash": "000000001f2d76d2",
           "type_uses_external": [
             "Eq",
@@ -680,7 +680,7 @@
           "name": "Fixture2000.two_add_two",
           "packaged_fields": [],
           "transitive_sorry": false,
-          "type": "2 + 2 = 4",
+          "type": "Eq.{1} (HAdd.hAdd.{0, 0, 0} (OfNat.ofNat.{0} 2) (OfNat.ofNat.{0} 2)) (OfNat.ofNat.{0} 4)",
           "type_hash": "00000000c8a69e1e",
           "type_uses_external": [
             "Eq",
@@ -730,7 +730,7 @@
           "name": "Fixture2000.degree_le_mul_one_add_zero",
           "packaged_fields": [],
           "transitive_sorry": true,
-          "type": "∀ (c : Fixture2000.ChainComplexToy), c.degree ≤ c.degree * 1 + 0",
+          "type": "∀ (c : Fixture2000.ChainComplexToy),\n  LE.le.{0} (Fixture2000.ChainComplexToy.degree c)\n    (HAdd.hAdd.{0, 0, 0}\n      (HMul.hMul.{0, 0, 0} (Fixture2000.ChainComplexToy.degree c) (OfNat.ofNat.{0} 1))\n      (OfNat.ofNat.{0} 0))",
           "type_hash": "000000007b68bd57",
           "type_uses_external": [
             "HAdd.hAdd",
@@ -788,7 +788,7 @@
           "name": "Fixture2000.degree_mul_comm",
           "packaged_fields": [],
           "transitive_sorry": true,
-          "type": "∀ (c : Fixture2000.ChainComplexToy) (n : ℕ), c.degree * n = n * c.degree",
+          "type": "∀ (c : Fixture2000.ChainComplexToy) (n : Nat),\n  Eq.{1} (HMul.hMul.{0, 0, 0} (Fixture2000.ChainComplexToy.degree c) n)\n    (HMul.hMul.{0, 0, 0} n (Fixture2000.ChainComplexToy.degree c))",
           "type_hash": "00000000db923723",
           "type_uses_external": [
             "Eq",
@@ -877,7 +877,7 @@
           "meaning_hash": "8c625919407b1e82",
           "name": "Fixture2001.PointedToyComplex.mk",
           "transitive_sorry": false,
-          "type": "Fixture2000.ChainComplexToy → ℕ → Fixture2001.PointedToyComplex",
+          "type": "Fixture2000.ChainComplexToy → Nat → Fixture2001.PointedToyComplex",
           "type_hash": "00000000cb1416aa",
           "type_uses_external": [
             "Nat"
@@ -901,7 +901,7 @@
           "meaning_hash": "7757c526bbab5bc2",
           "name": "Fixture2001.PointedToyComplex.point",
           "transitive_sorry": false,
-          "type": "Fixture2001.PointedToyComplex → ℕ",
+          "type": "Fixture2001.PointedToyComplex → Nat",
           "type_hash": "0000000069312f6a",
           "type_uses_external": [
             "Nat"
@@ -930,7 +930,7 @@
           "name": "Fixture2001.degree_add_zero",
           "packaged_fields": [],
           "transitive_sorry": false,
-          "type": "∀ (c : Fixture2001.PointedToyComplex), c.complex.degree + 0 = c.complex.degree",
+          "type": "∀ (c : Fixture2001.PointedToyComplex),\n  Eq.{1}\n    (HAdd.hAdd.{0, 0, 0}\n      (Fixture2000.ChainComplexToy.degree (Fixture2001.PointedToyComplex.complex c))\n      (OfNat.ofNat.{0} 0))\n    (Fixture2000.ChainComplexToy.degree (Fixture2001.PointedToyComplex.complex c))",
           "type_hash": "0000000040923ee7",
           "type_uses_external": [
             "Eq",

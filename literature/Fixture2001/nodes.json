@@ -162,9 +162,9 @@
             "line": 64,
             "meaning_hash": "a58cd93d46fc50ee",
             "name": "Fixture2001.degree_add_zero",
-            "type": "∀ (c : Fixture2001.PointedToyComplex), c.complex.degree + 0 = c.complex.degree",
+            "type": "∀ (c : Fixture2001.PointedToyComplex),\n  Eq.{1}\n    (HAdd.hAdd.{0, 0, 0}\n      (Fixture2000.ChainComplexToy.degree (Fixture2001.PointedToyComplex.complex c))\n      (OfNat.ofNat.{0} 0))\n    (Fixture2000.ChainComplexToy.degree (Fixture2001.PointedToyComplex.complex c))",
             "type_hash": "0000000040923ee7",
-            "type_sha256": "498a4581a20559d80938a60d629c6cc338accc2fd39f7932ec8f7ba04e5b5b26",
+            "type_sha256": "bab7c9a47d3e10a4277d54000eec8c29270479ce3cf6aac85db0143790976253",
             "type_uses_external": [
               "Eq",
               "HAdd.hAdd",

@@ -11,7 +11,13 @@ section, printed pages, label and existing tags (run homalg taxonomy find first)
 Preserve the source's definitions and hypotheses (P-1), and its proof route (P-2).
 Run homalg foundations draft {doc_key} if the boundary is empty. For each draft,
 verify whether the source assumes it and supply source evidence before proposing
-it; remove suggestions that are not part of this document's boundary. Never mark
-foundations confirmed or write early_review; those are human decisions.
+it; remove suggestions that are not part of this document's boundary. Follow
+docs/REVIEW_POLICY.md: when independent-agent review is enabled, request an actual
+independent reviewer to inspect and confirm each proposed foundation through
+homalg foundations review with distinct --session and --author-session values.
+The author must not approve their own proposals or write confirmation fields.
+The separate early-review gate uses homalg plan --early-review-ok after its
+prerequisites and independent reviews pass. With the policy disabled, retain
+the documented human gates. Never invent human confirmations.
 
 Done when homalg stage-check {task_id} exits 0. Then set this task to done.

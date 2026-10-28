@@ -51,8 +51,9 @@ def main() -> int:
         destination, output, bundle, model="not-reported", by="interactive-codex-session"
     )
     summary = load_yaml(Path(result["summary_file"]).read_text())
-    if any(item["review"]["status"] != "unreviewed" for item in summary["summaries"]):
-        raise ValueError("The rehearsal must not claim a human review")
+    imported = next(item for item in summary["summaries"] if item["version"] == result["version"])
+    if imported["review"]["status"] != "unreviewed":
+        raise ValueError("A newly imported summary must remain unreviewed")
     artifact = {
         "concept": "cohomology",
         "current_bundle_sha256": bundle["bundle_sha256"],

@@ -57,8 +57,13 @@ def test_source_proof_route_and_real_bridge_endpoints_are_compiled(compiled: dic
     for local, name, external in (
         ("Bridge_Def_cochain_mathlib", "cochain_multilinear_equivalence", "MultilinearMap"),
         ("Bridge_Def_two_sided_module_mathlib", "two_sided_module_bridge", "NonUnitalAlgHom"),
+        ("Bridge_Def_separable_mathlib", "basisExtension_tensor_equivalence", "TensorProduct"),
     ):
         declaration = compiled[f"HomAlg.Hochschild1945.{local}"][f"Hochschild1945.{name}"]
+        assert not declaration["direct_sorry"], name
+        assert not declaration["transitive_sorry"], name
+        assert not declaration["hollow"], name
+        assert set(declaration["axioms"]) <= KERNEL_AXIOMS, name
         assert (
             external in declaration["type_uses_external"]
             or external in declaration["value_uses_external"]

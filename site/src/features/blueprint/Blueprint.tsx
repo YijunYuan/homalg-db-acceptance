@@ -76,8 +76,9 @@ export const styles: StylesheetStyle[] = [
     style: {
       "border-style": "dashed",
       "border-width": 3,
-      "background-image":
-        'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M0 8L8 0" stroke="%23597d60" stroke-opacity=".25"/></svg>',
+      "background-image": `data:image/svg+xml;charset=utf-8,${encodeURIComponent(
+        '<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><path d="M0 8L8 0" stroke="#597d60" stroke-opacity=".25"/></svg>',
+      )}`,
       "background-repeat": "repeat",
       "background-width": "8px",
       "background-height": "8px",

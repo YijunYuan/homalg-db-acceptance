@@ -168,8 +168,49 @@ def interfaceConstants (env : Environment) (info : ConstantInfo) : Array Name :=
         names := names ++ ctorInfo.type.getUsedConstants
   return names
 
+/-- Capture Lean's builtin printers before loading user modules. Imported notation,
+delaborators, formatters and name-shortening must not alter persistent type text. -/
+def canonicalPrinter : IO (Environment → Environment) := do
+  let delab ← PrettyPrinter.Delaborator.delabAttribute.tableRef.get
+  let unexpand ← PrettyPrinter.Delaborator.appUnexpanderAttribute.tableRef.get
+  let formatter ← PrettyPrinter.formatterAttribute.tableRef.get
+  let parenthesizer ← PrettyPrinter.parenthesizerAttribute.tableRef.get
+  let category ← PrettyPrinter.categoryParenthesizerAttribute.tableRef.get
+  return fun env =>
+    let env := PrettyPrinter.Delaborator.delabAttribute.ext.modifyState env
+      (fun _ => KeyedDeclsAttribute.mkStateOfTable delab)
+    let env := PrettyPrinter.Delaborator.appUnexpanderAttribute.ext.modifyState env
+      (fun _ => KeyedDeclsAttribute.mkStateOfTable unexpand)
+    let env := PrettyPrinter.formatterAttribute.ext.modifyState env
+      (fun _ => KeyedDeclsAttribute.mkStateOfTable formatter)
+    let env := PrettyPrinter.parenthesizerAttribute.ext.modifyState env
+      (fun _ => KeyedDeclsAttribute.mkStateOfTable parenthesizer)
+    PrettyPrinter.categoryParenthesizerAttribute.ext.modifyState env
+      (fun _ => KeyedDeclsAttribute.mkStateOfTable category)
+
+/-- Print fully qualified types with fixed builtin syntax, omitting implicit
+arguments and proof terms while kernel expression hashes retain their content. -/
+def canonicalType (printEnv : Environment) (type : Expr) : MetaM String :=
+  withEnv printEnv <| withOptions (fun _ =>
+    let options : Options := {}
+    let options := options.set `format.width (100 : Nat)
+    let options := options.setBool `pp.notation false
+    let options := options.setBool `pp.fullNames true
+    let options := options.setBool `pp.fieldNotation false
+    let options := options.setBool `pp.explicit false
+    let options := options.setBool `pp.coercions false
+    let options := options.setBool `pp.universes true
+    let options := options.setBool `pp.proofs false
+    let options := options.set `pp.proofs.threshold (0 : Nat)
+    let options := options.setBool `pp.deepTerms true
+    let options := options.setBool `pp.analyze false
+    let options := options.setBool `pp.beta false
+    let options := options.set `pp.maxSteps (2 ^ 64 : Nat)
+    options.setBool `pp.unicode.fun true) do
+    return (← PrettyPrinter.ppExpr type).pretty 100 |>.trimAscii.toString
+
 /-- Export one user-visible declaration and its authoritative compiled properties. -/
-def declaration (env : Environment) (prefixName owner name : Name) (info : ConstantInfo)
+def declaration (env printEnv : Environment) (prefixName owner name : Name) (info : ConstantInfo)
     (line : Nat) : MetaM Json := do
   let typeUses := collectUses env owner (interfaceConstants env info).toList
   let valueUses := collectUses env owner
@@ -189,9 +230,7 @@ def declaration (env : Environment) (prefixName owner name : Name) (info : Const
     | .opaqueInfo _ => pure "opaque"
     | _ => pure "other"
   let isProp ← Meta.isProp info.type
-  let typeString ← withOptions (fun options =>
-      (options.set `format.width (100 : Nat)).setBool `pp.unicode.fun true) do
-    return (← Meta.ppExpr info.type).pretty 100 |>.trimAscii.toString
+  let typeString ← canonicalType printEnv info.type
   let typeExternal := (sortedNames typeUses.external).map Name.toString
   let valueExternal := (sortedNames valueUses.external).map Name.toString
   let typeNodes := usedNodes env typeUses.project
@@ -221,7 +260,7 @@ def declaration (env : Environment) (prefixName owner name : Name) (info : Const
   return Json.mkObj fields
 
 /-- Build every selected module's JSON in one CoreM invocation with loaded extensions. -/
-def exportModules (env : Environment) (prefixName : Name) : CoreM (Array Json) := do
+def exportModules (env printEnv : Environment) (prefixName : Name) : CoreM (Array Json) := do
   let mut result := #[]
   let names := env.header.moduleNames
   for index in [:names.size] do
@@ -234,7 +273,7 @@ def exportModules (env : Environment) (prefixName : Name) : CoreM (Array Json) :
       if isAuxiliary name then continue
       let some ranges ← findDeclarationRanges? name | continue
       let some info := env.find? name | continue
-      decls := decls.push (← (declaration env prefixName owner name info ranges.range.pos.line).run')
+      decls := decls.push (← (declaration env printEnv prefixName owner name info ranges.range.pos.line).run')
     result := result.push <| Json.mkObj [
       ("module", toJson owner.toString), ("node_id", toJson (nodeId owner)), ("decls", toJson decls)]
   return result.qsort fun a b =>
@@ -311,12 +350,14 @@ unsafe def main (args : List String) : IO UInt32 := do
     let roots ← if config.roots.isEmpty then HomAlgExport.discoverModules else pure config.roots
     initSearchPath (← findSysroot)
     enableInitializersExecution
+    let canonicalPrinter ← HomAlgExport.canonicalPrinter
     let env ← importModules (roots.map fun name => { module := name }) {}
       (trustLevel := 1024) (loadExts := true)
     let context : Core.Context := { fileName := "<export>", fileMap := default, maxHeartbeats := 0 }
-    let (modules, _) ← (HomAlgExport.exportModules env config.prefixName).toIO context { env }
+    let (modules, _) ←
+      (HomAlgExport.exportModules env (canonicalPrinter env) config.prefixName).toIO context { env }
     let result := Json.mkObj [
-      ("generator", Json.mkObj [("name", toJson "homalg-export"), ("version", toJson "2")]),
+      ("generator", Json.mkObj [("name", toJson "homalg-export"), ("version", toJson "3")]),
       ("toolchain", toJson ((← IO.FS.readFile "lean-toolchain").trimAscii.toString)),
       ("mathlib_rev", toJson (← HomAlgExport.mathlibRevision)), ("modules", toJson modules),
       ("external_constants", Json.mkObj (config.checkConstants.toList.map fun name =>

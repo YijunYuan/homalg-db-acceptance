@@ -453,9 +453,34 @@ def test_real_external_dependency_lists_are_sorted_and_bounded(regression_worksp
 
 
 @requires_lean
-def test_fixture_json_golden_and_proved_helper_dependency() -> None:
+def test_fixture_json_golden_and_proved_helper_dependency(tmp_path: Path) -> None:
     """The pinned production fixtures define the real exporter compatibility snapshot."""
-    raw = export_lean(REPO)
+    keys = ["Fixture2000", "Fixture2001"]
+    modules = leanexport.module_list(REPO, keys)
+    modules_file = tmp_path / "modules.txt"
+    modules_file.write_text("\n".join(modules) + "\n")
+    schemas = SchemaStore(REPO / "schema")
+    constants_file = tmp_path / "constants.txt"
+    constants_file.write_text("\n".join(leanexport.check_constants(REPO, keys, schemas)) + "\n")
+    with leanexport.workspace_lock(REPO):
+        leanexport.run_tool(REPO, ["lake", "build", "homalg-export", *modules])
+        raw = json.loads(
+            leanexport.run_tool(
+                REPO,
+                [
+                    "lake",
+                    "exe",
+                    "homalg-export",
+                    "--modules",
+                    str(modules_file),
+                    "--check-constants",
+                    str(constants_file),
+                    "--prefix",
+                    "HomAlg",
+                ],
+            )
+        )
+    assert not schemas.validate(raw, "lean-export.schema.json")
     expected = json.loads((REPO / "tools/tests/golden/fixture-export.json").read_text())
     assert raw == expected
     records = flat(raw)
@@ -493,3 +518,100 @@ def test_real_orphan_declaration_collision_identifies_both_modules(
         )
     assert caught.value.rule == "decl-unique"
     assert all(module in caught.value.output for module in modules)
+
+
+@requires_lean
+def test_real_type_text_is_independent_of_import_roots(tmp_path: Path) -> None:
+    """Unrelated notation and custom delaborators cannot change committed type text."""
+    shutil.copy2(REPO / "lean-toolchain", tmp_path / "lean-toolchain")
+    (tmp_path / "lake-manifest.json").write_text(
+        json_text({"packages": [{"name": "mathlib", "inputRev": "v4.35.0"}]})
+    )
+    sources = {
+        "HomAlg.Fixture2099.Plain": (
+            "/-- A theorem with no mathematical notation imports. -/\n"
+            "theorem Fixture2099.plain (n : Nat) : n * 1 = n := Nat.mul_one n\n"
+        ),
+        "Noise.Notation": 'notation "ℕ" => Nat\n',
+        "Noise.Printer": (
+            "import Lean\nopen Lean PrettyPrinter Delaborator\n"
+            "/-- Deliberately ignores the pp.notation option. -/\n"
+            "@[delab app.Nat] meta def misleadingNat : Delab := `(String)\n"
+        ),
+    }
+    for module, source in sources.items():
+        path = tmp_path / Path(*module.split(".")).with_suffix(".lean")
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(source)
+        compile_module(tmp_path, module)
+
+    def exported(roots: list[str], *, modules_file: bool = False) -> dict[str, Any]:
+        """Use both supported scope selectors against the actual production binary."""
+        if modules_file:
+            (tmp_path / "modules.txt").write_text("\n".join(roots) + "\n")
+            scope = ["--modules", "modules.txt"]
+        else:
+            scope = [value for root in roots for value in ("--root", root)]
+        result = subprocess.run(
+            [
+                str(REPO / ".lake/build/bin/homalg-export"),
+                *scope,
+                "--prefix",
+                "HomAlg.Fixture2099",
+            ],
+            cwd=tmp_path,
+            env=dict(os.environ, LEAN_PATH=str(tmp_path)),
+            capture_output=True,
+            text=True,
+            timeout=120,
+        )
+        assert result.returncode == 0, result.stdout + result.stderr
+        raw = json.loads(result.stdout)
+        assert not SchemaStore(REPO / "schema").validate(raw, "lean-export.schema.json")
+        return flat(raw)["Fixture2099.plain"]
+
+    plain = "HomAlg.Fixture2099.Plain"
+    baseline = exported([plain])
+    variants = []
+    for roots, modules_file in (
+        ([plain, "Noise.Notation"], False),
+        (["Noise.Printer", plain], False),
+        ([plain, "Noise.Printer", "Noise.Notation"], True),
+        (["Noise.Notation", "Noise.Printer", plain], True),
+    ):
+        variant = exported(roots, modules_file=modules_file)
+        assert variant == baseline
+        variants.append(variant)
+    assert "Nat" in baseline["type"]
+    assert "String" not in baseline["type"]
+    assert "ℕ" not in baseline["type"]
+    assert "instHMul" not in baseline["type"]
+    assert "⋯" not in baseline["type"]
+
+    content = sources[plain].encode()
+    header = {"decls": ["Fixture2099.plain"], "deps": {"statement": [], "proof": []}}
+    before = local_derived("HomAlg/Fixture2099/Plain.lean", content, header, flat_record(baseline))
+    after = local_derived(
+        "HomAlg/Fixture2099/Plain.lean",
+        content,
+        header,
+        flat_record(variants[-1]),
+    )
+    assert before == after
+
+    # A real statement edit still changes both the compiled and displayed hashes.
+    source = tmp_path / "HomAlg/Fixture2099/Plain.lean"
+    source.write_text(sources[plain].replace("n * 1 = n := Nat.mul_one n", "n + 0 = n := rfl"))
+    compile_module(tmp_path, plain)
+    changed = exported([plain, "Noise.Printer", "Noise.Notation"])
+    assert changed["type"] != baseline["type"]
+    assert changed["type_hash"] != baseline["type_hash"]
+    assert (
+        hashlib.sha256(changed["type"].encode()).digest()
+        != hashlib.sha256(baseline["type"].encode()).digest()
+    )
+
+
+def flat_record(declaration: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    """Adapt one real declaration to the deterministic local merge interface."""
+    return {declaration["name"]: declaration}

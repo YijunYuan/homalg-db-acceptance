@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from fixture_support import BASELINE_DOCUMENTS
 
 from homalg.headers import parse_header
 from homalg.leanexport import workspace_lock
@@ -43,19 +44,21 @@ def parse_export(text: str) -> dict[str, dict[str, Any]]:
 
 @pytest.fixture(scope="module")
 def exports() -> dict[str, dict[str, dict[str, Any]]]:
-    """Compile the package once, then load each document root independently."""
-    run_lean("build", timeout=600)
+    """Compile the fixed samples, then load each document root independently."""
+    run_lean("build", "homalg-export", "HomAlg.Fixture2000", "HomAlg.Fixture2001", timeout=600)
     return {
         doc: parse_export(
             run_lean("exe", "homalg-export", "--root", f"HomAlg.{doc}", "--prefix", f"HomAlg.{doc}")
         )
-        for doc in ("Fixture2000", "Fixture2001")
+        for doc in BASELINE_DOCUMENTS
     }
 
 
 def test_fixture_statements_and_proofs_match_their_source_pages() -> None:
     """A fixture's authored statement and proof must quote its own paginated source."""
-    for path in sorted((REPO / "HomAlg").glob("Fixture*/*.lean")):
+    for path in sorted(
+        path for key in BASELINE_DOCUMENTS for path in (REPO / "HomAlg" / key).glob("*.lean")
+    ):
         header = parse_header(path.read_text())
         if "aux" in header.metadata:
             continue

@@ -36,11 +36,15 @@ def test_import_probe_preserves_comments_and_checks_elaboration(
     assert not list((repo / "build").glob("imports-*"))
 
 
-def test_review_comparison_uses_committed_blob_without_checkout(repo: Path) -> None:
+def test_review_comparison_uses_committed_blob_without_checkout(
+    repo: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     """A stored before/after change is visible while no baseline is explicitly unknown."""
+    # Horizon's TMPDIR is inside its checkout: stop Git discovering that parent.
+    subprocess.run(["git", "init", "-q"], cwd=repo, check=True)
+    monkeypatch.delenv("GITHUB_BASE_SHA", raising=False)
     assert comparison_nodes(repo, "Fixture2000") == (None, {})
     for command in (
-        ["git", "init", "-q"],
         ["git", "config", "user.name", "Test"],
         ["git", "config", "user.email", "test@example.invalid"],
         ["git", "add", "literature/Fixture2000/nodes.json"],

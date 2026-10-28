@@ -10,8 +10,12 @@ Build only via horizon check. Prune unused auxiliaries through homalg prune-chec
 For every node worked on but unfinished in this session, add a comment beginning
 attempt: describing the approach, failure and next obstacle. Distinct sessions
 count as separate attempts; duplicate comments do not. Suspected source proof
-errors require homalg dispute open --kind proof and a local human question; never
-silently replace the route or confirm/resolve a dispute. Do not send GitHub issues.
+errors require homalg dispute open --kind proof and a local question for the
+owner when the mathematical/source disagreement remains unresolved. Explained
+formalization deviations follow the independent review policy in
+docs/REVIEW_POLICY.md; do not request routine human review when that policy
+authorizes an actual independent agent review. Never silently replace the route
+or fabricate a human dispute decision. Do not send GitHub issues.
 Review any changed statements before relocking. Never fabricate human approvals,
 hide sorry in anonymous examples, or package the desired conclusion as a hypothesis.
 

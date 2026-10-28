@@ -2,7 +2,13 @@
 
 import pytest
 
-from homalg.classify import append_only, approval_reasons, classify_changed, owner_approved
+from homalg.classify import (
+    append_only,
+    approval_reasons,
+    classify_changed,
+    document_keys,
+    owner_approved,
+)
 
 
 @pytest.mark.parametrize(
@@ -12,6 +18,10 @@ from homalg.classify import append_only, approval_reasons, classify_changed, own
         (["literature/Example2000/document.yaml"], [], [], "register", False),
         (["literature/Example2000/document.yaml"], [], ["Example2000"], "formalization", True),
         (["HomAlg/Fixture2000/Def_1.lean"], [], [], "infra", True),
+        (["HomAlg/Fixture2001/Thm_1.lean"], [], [], "infra", True),
+        (["HomAlg/Fixture2002/Thm_1.lean"], [], ["Fixture2002"], "formalization", True),
+        (["literature/Fixture2002/document.yaml"], [], [], "register", False),
+        (["literature/Fixture2002/claim.yaml"], [], ["Fixture2002"], "claim", False),
         (["docs/CI.md"], [], [], "infra", False),
         (
             ["literature/Example2000/claim.yaml", "literature/Example2001/claim.yaml"],
@@ -36,6 +46,17 @@ def test_status_branch_cannot_be_merged() -> None:
     """Progress-only branches must never become document PRs."""
     with pytest.raises(ValueError, match="not merged"):
         classify_changed(["status.json"], head_branch="status/Example2000")
+
+
+def test_only_versioned_baseline_fixtures_are_infrastructure() -> None:
+    """A Fixture prefix cannot hide a new document from collaboration policy."""
+    paths = [f"literature/Fixture{year}/document.yaml" for year in (2000, 2001, 2002)]
+    assert document_keys(paths) == {"Fixture2002"}
+    assert document_keys(paths, include_fixtures=True) == {
+        "Fixture2000",
+        "Fixture2001",
+        "Fixture2002",
+    }
 
 
 def test_owner_sensitivity_includes_deleted_keys_but_not_structure() -> None:

@@ -6,6 +6,14 @@ single `DataSource` interface; React components consume TanStack Query hooks.
 All direct and transitive npm versions are locked in `site/package-lock.json`.
 Node 22 or newer is required.
 
+The build fixes Vite `base` to `./`. Hash routes keep asset, worker and data URLs
+relative to the document directory, so the same artifact works at a Pages project
+subpath, a custom-domain root and local static hosting. No repository-event or
+environment-derived base is needed. `file://` is unsupported because module
+scripts and data requests require HTTP. After building, run
+`node site/scripts/check-relative-base.mjs` to exercise a real static subpath and
+the search worker with the synthetic dataset.
+
 ## Run locally
 
 ```sh

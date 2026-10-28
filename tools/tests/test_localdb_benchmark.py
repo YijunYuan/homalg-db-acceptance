@@ -8,6 +8,7 @@ from pathlib import Path
 from time import perf_counter
 
 import pytest
+from fixture_support import BASELINE_DOCUMENTS
 
 from homalg.index import assemble_index
 from homalg.localdb import Database, build_artifacts_db
@@ -107,7 +108,8 @@ def synthetic_artifacts(count: int, template: dict) -> dict:
 def template_index() -> dict:
     """Use the fixture index from the acceptance data generation step."""
     docs, nodes = [], []
-    for path in sorted((ROOT / "literature").glob("Fixture*/document.yaml")):
+    for key in BASELINE_DOCUMENTS:
+        path = ROOT / "literature" / key / "document.yaml"
         document = load_yaml(path.read_text())
         docs.append({"document": document, "claim": {"state": "unclaimed"}})
         nodes.extend(json.loads((path.parent / "nodes.json").read_text())["nodes"])

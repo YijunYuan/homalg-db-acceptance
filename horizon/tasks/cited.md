@@ -8,8 +8,11 @@ language proof in the docstring. Attempt a proof and record failures as node com
 Mathlib reuse is permitted for cited proofs. Never conceal remaining assumptions.
 Dispatch source-fidelity-reviewer and honesty-reviewer when appropriate. Append
 five-level reviews with Verdict and comparison tables under literature/{doc_key}/reviews/.
-After satisfactory reviews, run homalg review-fidelity <NodeId> --by {login}
---session "$ARCHON_HORIZON_SESSION". Never write a human review or confirmation.
+After satisfactory reviews, the actual independent reviewer runs
+homalg review-fidelity <NodeId> --by {login} --session REVIEW_SESSION
+--author-session AUTHOR_SESSION. Record distinct actual author and reviewer
+executions, following docs/REVIEW_POLICY.md. The author must not self-review or
+invent an independent verdict. Never write a human review or confirmation.
 Build only through horizon check. Do not send public messages during the run.
 
 Done when homalg stage-check {task_id} exits 0. Then set this task to done.
