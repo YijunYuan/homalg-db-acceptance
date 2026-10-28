@@ -90,7 +90,7 @@ def notify(
         "--author",
         "homalg",
         "--body",
-        f"{marker}\n{message}",
+        f"{marker}\n\n{message}",
         "--json",
     ]
     if node:

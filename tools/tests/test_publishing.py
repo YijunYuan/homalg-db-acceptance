@@ -15,6 +15,26 @@ from homalg.schemas import SchemaStore
 NOW = datetime(2026, 1, 15, tzinfo=UTC)
 
 
+def test_diagnostic_inbox_body_has_a_title_and_paragraph(repo: Path, monkeypatch) -> None:
+    calls = []
+    monkeypatch.setattr(publishing, "inbox_items", lambda _: [])
+    monkeypatch.setattr(
+        publishing.engine,
+        "horizon",
+        lambda root, *args: calls.append((root, args)) or '{"id":"I-0001"}',
+    )
+    assert (
+        publishing.notify(
+            repo, "Fixture2000", "Publication failed.", rule="publish", node="Fixture2000.Thm_1"
+        )
+        == "I-0001"
+    )
+    root, args = calls[0]
+    assert root == repo
+    body = args[args.index("--body") + 1]
+    assert body == "[homalg:publish:Fixture2000.Thm_1]\n\nPublication failed."
+
+
 @pytest.fixture
 def publication(repo: Path, tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tuple[Path, Path]:
     remote = tmp_path / "public.git"

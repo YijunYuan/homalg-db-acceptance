@@ -93,6 +93,13 @@ Those exemptions are checked by the metadata and collaboration policy commands. 
 bypass in pull requests, as required to avoid blocking the sole owner's own PRs.
 Add a second maintainer for meaningful independent code-owner review.
 
+A registration-only document has no Lean node imports yet. Compiled existence
+checks for its foundation names are deferred and explicitly reported as
+`mathlib-decls-exist:DOC:no-node-modules` in skipped coverage. The first node
+restores strict compiled lookup checks; a misspelt or unavailable foundation then
+fails validation. Metadata schema and review-provenance checks remain active
+during registration.
+
 Remote acceptance must be exercised in a test repository: a contributor's
 infrastructure PR must require owner review, an eligible formalization PR must
 pass without it, and a claim PR must auto-merge after both required checks pass.
