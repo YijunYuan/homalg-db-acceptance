@@ -18,7 +18,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-ingest = ["pymupdf>=1.25,<2"]
+ingest = ["pymupdf>=1.25,<3"]
 serve = ["fastapi>=0.115,<1", "uvicorn>=0.34,<1"]
 evolution = ["openai>=2,<3"]
 
