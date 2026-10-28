@@ -1,0 +1,51 @@
+schema_version: 1
+concept: "cohomology"
+summaries:
+  - narrative_md: "The earlier paper connects semisimplicity and reflexivity (`Hochschild1942.Def_3_3`,
+      `Hochschild1942.Thm_3_4`), with an associative derivation criterion (`Hochschild1942.Thm_2_2`, `Hochschild1942.Thm_3_2`).
+      The later paper states its criterion through first cohomology: `Hochschild1945.Thm_4_1` characterizes
+      separability by vanishing for every two-sided module. Its introduction explicitly describes the
+      earlier result as a predecessor. This supports studying the change of language and ground-field
+      scope, but does not establish an unrestricted theorem-equivalence edge. The supplied records contain
+      editorial paraphrases and no Lean proofs."
+    stages:
+      - period: "1942"
+        doc: "Hochschild1942"
+        nodes:
+          - "Hochschild1942.Def_3_3"
+          - "Hochschild1942.Thm_2_2"
+          - "Hochschild1942.Thm_3_2"
+          - "Hochschild1942.Thm_3_4"
+        change: "Derivation and reflexivity criteria in the source’s algebraic setting."
+      - period: "1945"
+        doc: "Hochschild1945"
+        nodes:
+          - "Hochschild1945.Thm_4_1"
+        change: "Separability is expressed by the universal vanishing of first cohomology."
+    proposed_relations: []
+    proposed_aliases: []
+    open_questions:
+      - "Audit dimensional conventions, bimodule conventions and the associative restriction before proposing
+        a formal implication."
+      - "Resolve the printed 1941 citation against the publisher’s 1942 date without silently altering
+        transcription."
+    version: 1
+    provenance:
+      by: "llm"
+      model: "not-reported"
+      on: "2026-10-28"
+      prompt_version: 1
+      bundle_commit: "uncommitted-source-rehearsal"
+      bundle_sha256: "c8097dd5fa1455c5b3f2372a9eb728d554908964f6ded053a8234ff449da609b"
+      handle: "interactive-codex-session"
+    review:
+      kind: "agent"
+      by: "codex-root"
+      status: "accepted"
+      on: "2026-10-28"
+      session: "root-evolution-independent"
+      author_session: "/root/schema_taxonomy"
+      note: "Independent source-image review; accepted only as the limited editorial historical summary."
+      report: "docs/evolution/independent-review.md"
+      report_sha256: "bf1be2015df4665739c64fc1641d56eeb0613f357dad03179d8669c186301129"
+      subject_sha256: "14feaa6366b673c8a2f01e313389e7701d15e77def65f74005fc1886f72a25d3"

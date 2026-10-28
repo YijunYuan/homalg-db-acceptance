@@ -185,7 +185,7 @@ jobs:
 
   gate:
     needs: [classify, checks, lean]
-    if: always()
+    if: ${{ always() && !cancelled() }}
     runs-on: ubuntu-latest
     steps:
       - name: Require all applicable checks

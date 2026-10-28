@@ -27,7 +27,12 @@ def read_policy(repo: Path) -> dict[str, Any]:
 def agent_reviews_allowed(repo: Path | None = None, *, policy: dict | None = None) -> bool:
     """Accept a frozen ledger policy when supplied, never rereading live files in that case."""
     value = policy if policy is not None else read_policy(repo) if repo is not None else {}
-    return value.get("schema_version") == 1 and value.get("allow_independent_agent_reviews") is True
+    return (
+        isinstance(value, dict)
+        and type(value.get("schema_version")) is int
+        and value["schema_version"] == 1
+        and value.get("allow_independent_agent_reviews") is True
+    )
 
 
 def valid_agent_review(record: Any) -> bool:

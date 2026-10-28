@@ -126,6 +126,11 @@ def evaluate(repo: Path, record: dict[str, Any], *, refresh_exports: bool = True
             elif stage in {"CITED", "STMT"}:
                 if node["approx"] or derived["local_status"] == "planned":
                     failures.append(f"{node['id']}: fresh main declarations are required")
+                # An owner-confirmed source error is a settled statement outcome.
+                # Its counterexample/report must not be relabelled satisfactory.
+                # Fresh compiled declarations and the full validation below still apply.
+                if node["global"]["headline"] == "error":
+                    continue
                 if not authored["fidelity"].get("reviewed") or node["global"]["reopened"]:
                     failures.append(
                         f"{node['id']}: a current satisfactory statement lock is required"

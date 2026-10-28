@@ -9,12 +9,13 @@ import path from "node:path";
 import type { Connect } from "vite";
 
 const site = import.meta.dirname;
-const base = process.env.VITE_BASE_URL || "/";
+const base = "./";
 /** Serve committed samples only when a generated public dataset is unavailable. */
 function fixtures(): Plugin {
   const middleware: Connect.NextHandleFunction = (req, res, next) => {
     if (existsSync(path.join(site, "public/data/manifest.json"))) return next();
-    const prefix = `${base.replace(/\/$/, "")}/data/`;
+    // Vite serves a relative-base build at the preview/dev server root.
+    const prefix = "/data/";
     const url = new URL(req.url || "/", "http://localhost");
     if (!url.pathname.startsWith(prefix)) return next();
     let relative: string;

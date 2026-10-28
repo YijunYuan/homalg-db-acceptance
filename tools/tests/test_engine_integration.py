@@ -59,6 +59,19 @@ def test_runtime_state_reopens_current_source(repo: Path) -> None:
     assert overlay["Fixture2000.Def_1"]["approx"] is False
 
 
+def test_blueprint_preserves_arithmetic_and_literal_code() -> None:
+    """Spaced multiplication signs are not Markdown emphasis delimiters."""
+    equation = "n * 1 = n * 0 + n"
+    assert markdown_tex(equation) == equation
+    assert markdown_tex("*Keep* **both words** and *x*.") == (
+        r"\emph{Keep} \textbf{both words} and \emph{x}."
+    )
+    assert markdown_tex("`a*b*c_1` and [uses `Fixture2000.Def_1`]") == (
+        r"\texttt{a*b*c\_1} and \ref{Fixture2000.Def_1}"
+    )
+    assert markdown_tex("** spaced ** and * spaced *") == "** spaced ** and * spaced *"
+
+
 def test_human_approval_field_detection() -> None:
     """Agent sessions can raise/reopen reports but cannot confirm, resolve or edit old evidence."""
     document = {"foundations": [{"notion": "N", "status": "proposed"}]}

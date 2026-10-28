@@ -9,6 +9,7 @@ from homalg.schemas import load_yaml
 
 DOCUMENT_PATH = re.compile(r"^(?:HomAlg/([^/]+)(?:/|\.lean$)|literature/([^/]+)/)")
 SENSITIVE_FIELDS = {"doc_key", "year", "type", "foundations", "may_import"}
+BASELINE_FIXTURES = {"Fixture2000", "Fixture2001"}
 
 
 def document_keys(paths: Iterable[str], *, include_fixtures: bool = False) -> set[str]:
@@ -18,7 +19,7 @@ def document_keys(paths: Iterable[str], *, include_fixtures: bool = False) -> se
         match = DOCUMENT_PATH.match(path)
         if match:
             key = match.group(1) or match.group(2)
-            if include_fixtures or not key.startswith("Fixture"):
+            if include_fixtures or key not in BASELINE_FIXTURES:
                 result.add(key)
     return result
 

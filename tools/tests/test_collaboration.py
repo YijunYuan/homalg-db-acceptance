@@ -200,6 +200,20 @@ def test_submit_refuses_expired_claim_before_backup(repository: Path) -> None:
         submit(repository, "Example2000", no_claim=True, client=FakeGh(repository))
 
 
+def test_fixture_named_article_cannot_use_no_claim(repository: Path) -> None:
+    """Acceptance bypass follows the reviewed document type, never a name prefix."""
+    previous = repository / "literature/Example2000"
+    renamed = previous.with_name("Fixture2002")
+    previous.rename(renamed)
+    for name in ("document.yaml", "claim.yaml"):
+        path = renamed / name
+        data = parse_metadata(path.read_text())
+        data["doc_key"] = "Fixture2002"
+        path.write_text(dump_metadata(data))
+    with pytest.raises(ValueError, match="only permitted for synthetic"):
+        submit(repository, "Fixture2002", no_claim=True, client=FakeGh(repository))
+
+
 def test_owner_check_uses_newest_exact_head_review(repository: Path) -> None:
     """An approval of an older revision does not unlock a sensitive metadata change."""
     base = git(repository, "rev-parse", "HEAD")

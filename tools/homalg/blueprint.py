@@ -68,23 +68,21 @@ def escape_text(text: str) -> str:
 
 def markdown_tex(text: str) -> str:
     """Translate restrained prose markup without rewriting source mathematics."""
-    pattern = r"(\$\$[\s\S]*?\$\$|(?<!\\)\$[^\n]*?(?<!\\)\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\))"
+    pattern = (
+        r"(\$\$[\s\S]*?\$\$|(?<!\\)\$[^\n]*?(?<!\\)\$|\\\[[\s\S]*?\\\]|\\\([\s\S]*?\\\)"
+        r"|\[uses\s+`?[A-Za-z0-9_.]+`?\]|`[^`\n]+`)"
+    )
     parts = re.split(pattern, text)
+    for index in range(1, len(parts), 2):
+        if parts[index].startswith("`"):
+            parts[index] = r"\texttt{" + escape_text(parts[index][1:-1]) + "}"
+        elif parts[index].startswith("[uses"):
+            node_id = parts[index][5:-1].strip().strip("`")
+            parts[index] = rf"\ref{{{node_id}}}"
     for index in range(0, len(parts), 2):
-        value = parts[index]
-        refs: list[str] = []
-
-        def reference(match: re.Match[str], output: list[str] = refs) -> str:
-            output.append(match.group(1))
-            return f"HOMALGREFPLACEHOLDER{len(output) - 1}END"
-
-        value = re.sub(r"\[uses\s+`?([A-Za-z0-9_.]+)`?\]", reference, value)
-        value = escape_text(value)
-        value = re.sub(r"\*\*([^*]+)\*\*", r"\\textbf{\1}", value)
-        value = re.sub(r"(?<!\*)\*([^*]+)\*(?!\*)", r"\\emph{\1}", value)
-        value = re.sub(r"`([^`]+)`", r"\\texttt{\1}", value)
-        for number, node_id in enumerate(refs):
-            value = value.replace(f"HOMALGREFPLACEHOLDER{number}END", rf"\ref{{{node_id}}}")
+        value = escape_text(parts[index])
+        value = re.sub(r"\*\*([^*\s](?:[^*]*[^*\s])?)\*\*", r"\\textbf{\1}", value)
+        value = re.sub(r"(?<!\*)\*([^*\s](?:[^*]*[^*\s])?)\*(?!\*)", r"\\emph{\1}", value)
         parts[index] = value
     return "".join(parts)
 

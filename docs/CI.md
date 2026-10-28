@@ -53,8 +53,9 @@ All referenced actions are pinned to upstream commit SHAs. There is no
 
 Use an existing GitHub repository with the default branch `main` and an account
 with repository administration permissions. The script never creates repositories
-or opens pull requests. The checked-in `CODEOWNERS` initially contains comments
-only because the repository owner's login is not yet configured.
+or opens pull requests. The checked-in `CODEOWNERS` names `@YijunYuan`.
+Governance has been applied to the production and acceptance repositories;
+the commands below reproduce it for another repository or reconcile changes.
 
 Preview the complete plan without contacting GitHub or changing files:
 

@@ -87,6 +87,11 @@ def test_policy_is_explicit_and_frozen_policy_overrides_live_file(repo: Path) ->
         repo, policy={"schema_version": 1, "allow_independent_agent_reviews": False}
     )
     assert not agent_reviews_allowed(repo, policy={})
+    for version in (True, "1", 2):
+        assert not agent_reviews_allowed(
+            repo, policy={"schema_version": version, "allow_independent_agent_reviews": True}
+        )
+    assert not agent_reviews_allowed(repo, policy=[])
     with pytest.raises(ValueError, match="distinct"):
         evidence(repo, session="same", author=" same ")
     valid = evidence(repo)

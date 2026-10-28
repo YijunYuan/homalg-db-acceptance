@@ -8,16 +8,16 @@ independent agent reviews; only unresolved mathematical/source disagreements are
 escalated.
 It must not be read as a claim that M0–M7 are all accepted.
 
-| Milestone | Local implementation | Remaining acceptance |
+| Milestone | Delivered implementation and evidence | Remaining acceptance |
 | --- | --- | --- |
-| M0 | Repository layout, pinned Lean/Mathlib, licenses, two original paginated fixtures, 17 nodes, schemas, taxonomy, CLI, CI/governance configuration | Public repository/CI/deployment and human vocabulary review |
-| M1 | Header lexer, document/claim models, authored extraction, compiled JSON exporter, global index, static artifacts, semantic checks, authoring/review/taxonomy helpers, conventions | Actual remote PR contexts and human review of the real pilot |
-| M2 | React blueprint, source/Lean node view, fidelity audit, search, claims, source adapters, workers, accessible controls and content-addressed loading; browser timing targets passed | Deployed site |
-| M3 | Claim/renew/release/submit, typed PR classification, current-main ownership, owner approval, append-only rules, incremental CI and rulesets | Apply settings and exercise actual GitHub PRs/approvals/status branches |
-| M4 | Fork patches P0–P10, adapted skills, wheel with dashboard, hooks, planning/stages/scopes, private snapshots, progress/backup/sync/escalation, task templates/playbooks | Published release installation and cold-start Codex/Claude tasks producing a green remote PR |
-| M5 | Exact supplied PDF identity; all 10 body pages visually transcribed and independently reviewed; 29-item inventory; 11 agent-confirmed foundations; first definitions locked; §1–§3 proofs and three bridges compiled | Complete later statements and independent locks, early-review workflow and deployed pilot |
-| M6 | Concepts/relations, global graph/timeline, bundle/run/import/status/review, provider adapter, cumulative cost bound, stale summaries, hallucination checks, real two-source rehearsal | Designated human summary review; separately paid API execution is not claimed |
-| M7 | SQLite/FTS5 API, static/API parity, 100k benchmark, search partitions, graph overview strategy, session ledger concurrency, migration framework, security/runner documentation; browser timing targets passed | Optional doc-gen4 measured only after pilot completion |
+| M0 | Public repository, pinned Lean/Mathlib, schemas, fixtures, CI and applied governance; initial vocabulary independently reviewed in TAXONOMY_REVIEW.md | Final consolidated regression run |
+| M1 | Parsing, compiled exporter, index/artifacts, semantic checks and authoring commands; real registration and claim PRs passed remote CI | Cold-start export-context regression under repair; final pilot validation |
+| M2 | Blueprint, fidelity, search, claims, accessible views, static/API adapters and WebGL fallback; Pages deployment succeeded | Final pilot deployment and live progress verification |
+| M3 | Real registration PR #10 and claim PR #11 merged; main/status rulesets and Pages settings applied; infrastructure PRs #12–14 passed applicable CI | Final formalization PR and downloadable weekly data release |
+| M4 | Published fork v0.1.5-homalg.1, actual release-wheel installation and two null-session engine checks; policy-aware task templates | Real Claude Code/Codex cold-start tasks and their green submit PR are in progress |
+| M5 | Exact supplied PDF, ten reviewed body pages, 29 source items, 13 independently confirmed foundations, complete §1–§3 proofs and three bridges; later proofs and source-error evidence | Final independent statement locks, stage/early-review workflow and deployed pilot; remaining §4 proof obligations stay explicit |
+| M6 | Concepts/relations, global graph/timeline, provider adapter, import/review, cost guards and real two-source rehearsal; summary independently accepted with source/report hashes | Final consolidated regression run; separately paid API execution is not claimed |
+| M7 | SQLite/FTS5 API, static/API parity, 100k benchmark, partitioned search, graph overview, ledger concurrency and security documentation | Optional doc-gen4 remains disabled pending post-pilot measurement |
 
 All advertised CLI commands are implemented; `homalg --help` is the current
 command inventory. Unavailable context is listed in `summary.skipped`. A fast
@@ -96,22 +96,41 @@ unnumbered constructions. Page completion waits for every referenced node.
 Reviewed transcription is distinct from fidelity review of the Lean statement.
 The source's finite-dimensional nonunital algebra is retained; no automatic
 unital-algebra assumption or human confirmation is introduced. The current
-11 foundation entries have independent agent confirmations under the approved
+13 foundation entries have independent agent confirmations under the approved
 policy. Each record includes the author/reviewer sessions and a content hash;
 no human confirmation was invented.
 
-No public GitHub repository, PR, release or Pages deployment had been created at
-this checkpoint. Read-only GitHub checks found neither `YijunYuan/homalg-db` nor
-`YijunYuan/homalg-horizon`. The private literature source exists and is accessible.
-No paid provider call has been made by the evolution implementation tests.
+The public [database repository](https://github.com/YijunYuan/homalg-db) and
+[engine fork](https://github.com/YijunYuan/homalg-horizon) are now published.
+The fork's [v0.1.5-homalg.1 release](https://github.com/YijunYuan/homalg-horizon/releases/tag/v0.1.5-homalg.1)
+contains the wheel, installed into a fresh environment and exercised with real
+engine sessions. Fork CI passed, including both supported Python versions.
+The main repository's registration and claim PRs passed CI and merged; the
+[Pages deployment](https://github.com/YijunYuan/homalg-db/actions/runs/40635391845)
+succeeded after retrying a transient upstream TLS download failure. The site is
+at [yijunyuan.github.io/homalg-db](https://yijunyuan.github.io/homalg-db/).
+No reviewer was requested for the implementation PRs. At the owner's request,
+Dependabot version-update PRs were closed and automatic version-update creation
+was paused in PR #14; ordinary validation remains enabled.
 
-The real evolution rehearsal uses the 1945 pilot and verified primary-source
-pages from Hochschild's 1942 paper. The current interactive agent generated the
-summary; its exact model identifier was unavailable and is recorded as
-`not-reported`. No provider usage/cost is invented. The importer writes an
-unreviewed version in an isolated rehearsal repository because the second paper
-is not yet inventoried in the live database. Evidence, output and reproduction
-instructions are in [docs/evolution](evolution/README.md).
+The real evolution rehearsal uses the 1945 pilot and independently inspected
+primary-source pages from Hochschild's 1942 paper. Its generated summary was
+accepted by an actual independent root-agent review of the exact subject and
+bundle, recorded in [the public report](evolution/independent-review.md).
+The model identifier was unavailable and is recorded as `not-reported`; no
+provider usage or cost is invented. A repeat import created an unreviewed new
+version while preserving the older accepted version. The second paper is not
+inventoried in the live registry, so this is an isolated, reproducible rehearsal.
+See [evolution evidence](evolution/README.md) and its reviewed snapshot.
+
+The owner explicitly confirmed Theorem 5.1's source error after independent
+counterexample reviews. Its original claim, named unproved theorem and open,
+confirmed dispute are retained. This does not constitute approval of a corrected
+replacement theorem. A genuine quotient-annihilator construction is isolated
+from the false claim, and the following corollary has a complete local repaired
+proof with an explicit proof-route deviation. Its remaining inherited boundary
+is Theorem 4.1. Later statement locks do not claim that these named proof gaps
+have disappeared.
 
 ## Specification decisions
 
