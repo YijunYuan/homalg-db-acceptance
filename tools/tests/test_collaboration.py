@@ -209,6 +209,8 @@ def test_fixture_named_article_cannot_use_no_claim(repository: Path) -> None:
         path = renamed / name
         data = parse_metadata(path.read_text())
         data["doc_key"] = "Fixture2002"
+        if name == "document.yaml":
+            data["year"] = 2002
         path.write_text(dump_metadata(data))
     with pytest.raises(ValueError, match="only permitted for synthetic"):
         submit(repository, "Fixture2002", no_claim=True, client=FakeGh(repository))

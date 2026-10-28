@@ -126,6 +126,8 @@ def evaluate(repo: Path, record: dict[str, Any], *, refresh_exports: bool = True
             elif stage in {"CITED", "STMT"}:
                 if node["approx"] or derived["local_status"] == "planned":
                     failures.append(f"{node['id']}: fresh main declarations are required")
+                if stage == "CITED" and not authored.get("cited", {}).get("source"):
+                    failures.append(f"{node['id']}: source citation is incomplete")
                 # An owner-confirmed source error is a settled statement outcome.
                 # Its counterexample/report must not be relabelled satisfactory.
                 # Fresh compiled declarations and the full validation below still apply.
@@ -143,8 +145,6 @@ def evaluate(repo: Path, record: dict[str, Any], *, refresh_exports: bool = True
                     block["status"] != "satisfactory" for block in evidence.values()
                 ):
                     failures.append(f"{node['id']}: latest reviews must be satisfactory")
-                if stage == "CITED" and not authored.get("cited", {}).get("source"):
-                    failures.append(f"{node['id']}: source citation is incomplete")
         if stage == "PROOF":
             candidates = {
                 node["id"]: node

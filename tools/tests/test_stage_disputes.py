@@ -26,6 +26,10 @@ def test_disputed_statement_outcomes(repo: Path, monkeypatch, stage: str, case: 
     node = next(item for item in state["nodes"] if item["id"] == "Fixture2000.Prop_2")
     assert node["global"]["headline"] == "error"
     assert not node["authored"]["fidelity"].get("reviewed")
+    if stage == "CITED":
+        node["authored"]["cited"] = {
+            "source": {"kind": "folklore", "locator": "Synthetic source, page 3"}
+        }
     if case == "unconfirmed":
         node["authored"]["dispute"].pop("confirmed_by")
         node["global"]["headline"] = compute_status(node["authored"], node["derived"], {}, [])[1]
