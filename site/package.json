@@ -31,7 +31,7 @@
     "eslint": "9.39.5",
     "eslint-plugin-react": "7.37.5",
     "jsdom": "27.4.0",
-    "json-schema-to-typescript": "15.0.4",
+    "json-schema-to-typescript": "16.0.0",
     "prettier": "3.9.10",
     "tailwindcss": "4.3.3",
     "typescript": "5.9.3",
