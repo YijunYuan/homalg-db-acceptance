@@ -1,0 +1,103 @@
+id: "I-0003"
+provider: "local"
+kind: "issue"
+attention: "advisory"
+conversation: false
+status: "open"
+labels:
+  - "agent-ready"
+body: "Document and global exports disagree on pretty-printed Nat\n\nAfter the successful statement lock
+  and stage-check, make validate still exits 2 on nodes-json-fresh (15 context-dependent checks skipped;
+  Lean regression phase not reached). Comparing current document-generated nodes.json with merge_document
+  using build/validation-export.json shows only Fixture2002.mul_one derived type and type_sha256 differ:
+  document export prints Nat, global export prints ℕ. Kernel type/meaning hashes agree. Fix exporter notation
+  stability in a tooling task; current STMT.4 write scope excludes tooling and nodes.json."
+scope:
+  projects:
+    - "HomAlg"
+  blueprint_nodes:
+    - "Fixture2002.Thm_2"
+audience: "horizon"
+author: "horizon"
+owner_task: ""
+read_by:
+  - "Fixture2002.PROOF.2"
+source_ref: null
+created_at: "2026-10-28T05:16:12.938587+00:00"
+updated_at: "2026-10-28T05:28:31.413668+00:00"
+comments:
+  - id: "C-0001"
+    item: "I-0003"
+    author: "horizon"
+    at: "2026-10-28T05:28:31.412861+00:00"
+    provenance:
+      run: "0002"
+      session: "0002-horizon-Fixture2002.PROOF.2"
+      role: "horizon"
+      round: "0"
+      rounds: "1"
+      task: "Fixture2002.PROOF.2"
+      task_title: "Fixture2002 PROOF 2"
+      projects: "HomAlg"
+    body: "Reproduced after PROOF.2: the document stage-check passes with empty transitive axioms, but
+      make validate exits 2 on nodes-json-fresh (15 checks skipped; Lean regressions not reached). Document/global
+      exports still differ between Nat and ℕ while type and meaning hashes agree; repair remains outside
+      the proof task scope."
+metadata:
+  provenance:
+    run: "0001"
+    session: "0002-horizon-Fixture2002.STMT.4"
+    role: "horizon"
+    round: "0"
+    rounds: "1"
+    task: "Fixture2002.STMT.4"
+    task_title: "Fixture2002 STMT 2"
+    projects: "HomAlg"
+  read_by:
+    - "Fixture2002.PROOF.2"
+  history:
+    - at: "2026-10-28T05:16:12.940027+00:00"
+      actor: "horizon"
+      field: "created"
+      from: ""
+      to: "open"
+      note: "opened"
+      provenance:
+        run: "0001"
+        session: "0002-horizon-Fixture2002.STMT.4"
+        role: "horizon"
+        round: "0"
+        rounds: "1"
+        task: "Fixture2002.STMT.4"
+        task_title: "Fixture2002 STMT 2"
+        projects: "HomAlg"
+    - at: "2026-10-28T05:17:21.213890+00:00"
+      actor: "horizon"
+      field: "read_by"
+      from: ""
+      to: "read"
+      note: ""
+      provenance:
+        run: "0001"
+        session: "0002-horizon-Fixture2002.STMT.4"
+        role: "horizon"
+        round: "0"
+        rounds: "1"
+        task: "Fixture2002.STMT.4"
+        task_title: "Fixture2002 STMT 2"
+        projects: "HomAlg"
+    - at: "2026-10-28T05:25:18.888262+00:00"
+      actor: "horizon"
+      field: "read_by"
+      from: ""
+      to: "read"
+      note: ""
+      provenance:
+        run: "0002"
+        session: "0002-horizon-Fixture2002.PROOF.2"
+        role: "horizon"
+        round: "0"
+        rounds: "1"
+        task: "Fixture2002.PROOF.2"
+        task_title: "Fixture2002 PROOF 2"
+        projects: "HomAlg"

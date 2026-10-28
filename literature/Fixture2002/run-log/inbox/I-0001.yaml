@@ -1,0 +1,83 @@
+id: "I-0001"
+provider: "local"
+kind: "memory"
+attention: "advisory"
+conversation: false
+status: "open"
+labels:
+  - "agent-ready"
+body: "[persistent] Lean LSP MCP times out on initialize in this workspace\n\nlean-lsp failed to start
+  twice (initialize timed out after 30s) in run 0001 session 0002-horizon-Fixture2002.STMT.3. The serialized
+  fallback horizon check HomAlg.<Doc>.<Local> worked (28s warm). Next sessions: try the LSP once, then
+  go straight to horizon check instead of retrying."
+scope:
+  projects:
+    - "HomAlg"
+audience: "horizon"
+author: "horizon"
+owner_task: ""
+read_by:
+  - "Fixture2002.PROOF.1"
+source_ref: null
+created_at: "2026-10-28T04:59:10.599673+00:00"
+updated_at: "2026-10-28T05:40:46.198946+00:00"
+comments:
+  - id: "C-0001"
+    item: "I-0001"
+    author: "horizon"
+    at: "2026-10-28T05:40:46.197898+00:00"
+    provenance:
+      run: "0002"
+      session: "0002-horizon-Fixture2002.PROOF.1"
+      role: "horizon"
+      round: "0"
+      rounds: "1"
+      task: "Fixture2002.PROOF.1"
+      task_title: "Fixture2002 PROOF 1"
+      projects: "HomAlg"
+    body: "Session 0002-horizon-Fixture2002.PROOF.1: lean-lsp initialized normally this time (diagnostics
+      and lean_verify on HomAlg/Fixture2002/Thm_1.lean within seconds); the earlier timeout was not reproduced.
+      Keep the try-once-then-horizon-check rule."
+metadata:
+  provenance:
+    run: "0001"
+    session: "0002-horizon-Fixture2002.STMT.3"
+    role: "horizon"
+    round: "0"
+    rounds: "1"
+    task: "Fixture2002.STMT.3"
+    task_title: "Fixture2002 STMT 1"
+    projects: "HomAlg"
+  read_by:
+    - "Fixture2002.PROOF.1"
+  history:
+    - at: "2026-10-28T04:59:10.600660+00:00"
+      actor: "horizon"
+      field: "created"
+      from: ""
+      to: "open"
+      note: "opened"
+      provenance:
+        run: "0001"
+        session: "0002-horizon-Fixture2002.STMT.3"
+        role: "horizon"
+        round: "0"
+        rounds: "1"
+        task: "Fixture2002.STMT.3"
+        task_title: "Fixture2002 STMT 1"
+        projects: "HomAlg"
+    - at: "2026-10-28T05:14:06.346056+00:00"
+      actor: "horizon"
+      field: "read_by"
+      from: ""
+      to: "read"
+      note: ""
+      provenance:
+        run: "0001"
+        session: "0002-horizon-Fixture2002.STMT.3"
+        role: "horizon"
+        round: "0"
+        rounds: "1"
+        task: "Fixture2002.STMT.3"
+        task_title: "Fixture2002 STMT 1"
+        projects: "HomAlg"

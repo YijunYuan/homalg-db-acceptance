@@ -1,85 +1,85 @@
 schema_version: 1
 concepts:
-- id: chain-complex
-  name: Chain complex
-  aliases: []
-  description: Graded objects with differentials whose successive composites vanish.
-  related_tags:
-  - chain-complex
-  parents: []
-  merged_into: null
-- id: homology
-  name: Homology
-  aliases: []
-  description: Cycles modulo boundaries associated with a complex.
-  related_tags:
-  - homology
-  parents: []
-  merged_into: null
-- id: cohomology
-  name: Cohomology
-  aliases: []
-  description: Cohomology objects associated with a cochain complex.
-  related_tags:
-  - cohomology
-  parents: []
-  merged_into: null
-- id: exact-sequence
-  name: Exact sequence
-  aliases: []
-  description: A sequence whose consecutive image and kernel agree.
-  related_tags:
-  - exact-sequence
-  parents: []
-  merged_into: null
-- id: chain-homotopy
-  name: Chain homotopy
-  aliases: []
-  description: A homotopy between morphisms of complexes.
-  related_tags:
-  - chain-homotopy
-  parents:
-  - chain-complex
-  merged_into: null
-- id: resolution
-  name: Resolution
-  aliases: []
-  description: An exact complex used to study an object through simpler objects.
-  related_tags:
-  - resolution
-  parents: []
-  merged_into: null
-- id: derived-functor
-  name: Derived functor
-  aliases:
-  - satellite
-  description: Left and right derived functors and their constructions from resolutions.
-  related_tags:
-  - derived-functor
-  parents: []
-  merged_into: null
-- id: ext
-  name: Ext
-  aliases: []
-  description: Extension groups viewed through derived functors or extensions.
-  related_tags:
-  - ext
-  parents:
-  - derived-functor
-  merged_into: null
-- id: abelian-category
-  name: Abelian category
-  aliases: []
-  description: An additive category with kernels, cokernels and the abelian exactness axioms.
-  related_tags:
-  - abelian-category
-  parents: []
-  merged_into: null
-- id: spectral-sequence
-  name: Spectral sequence
-  aliases: []
-  description: Successive pages of differential objects converging to filtered information.
-  related_tags:
-  - spectral-sequence
-  parents: []
-  merged_into: null
+  - id: "chain-complex"
+    name: "Chain complex"
+    aliases: []
+    description: "Graded objects with differentials whose successive composites vanish."
+    related_tags:
+      - "chain-complex"
+    parents: []
+    merged_into: null
+  - id: "homology"
+    name: "Homology"
+    aliases: []
+    description: "Cycles modulo boundaries associated with a complex."
+    related_tags:
+      - "homology"
+    parents: []
+    merged_into: null
+  - id: "cohomology"
+    name: "Cohomology"
+    aliases: []
+    description: "Cohomology objects associated with a cochain complex."
+    related_tags:
+      - "cohomology"
+    parents: []
+    merged_into: null
+  - id: "exact-sequence"
+    name: "Exact sequence"
+    aliases: []
+    description: "A sequence whose consecutive image and kernel agree."
+    related_tags:
+      - "exact-sequence"
+    parents: []
+    merged_into: null
+  - id: "chain-homotopy"
+    name: "Chain homotopy"
+    aliases: []
+    description: "A homotopy between morphisms of complexes."
+    related_tags:
+      - "chain-homotopy"
+    parents:
+      - "chain-complex"
+    merged_into: null
+  - id: "resolution"
+    name: "Resolution"
+    aliases: []
+    description: "An exact complex used to study an object through simpler objects."
+    related_tags:
+      - "resolution"
+    parents: []
+    merged_into: null
+  - id: "derived-functor"
+    name: "Derived functor"
+    aliases:
+      - "satellite"
+    description: "Left and right derived functors and their constructions from resolutions."
+    related_tags:
+      - "derived-functor"
+    parents: []
+    merged_into: null
+  - id: "ext"
+    name: "Ext"
+    aliases: []
+    description: "Extension groups viewed through derived functors or extensions."
+    related_tags:
+      - "ext"
+    parents:
+      - "derived-functor"
+    merged_into: null
+  - id: "abelian-category"
+    name: "Abelian category"
+    aliases: []
+    description: "An additive category with kernels, cokernels and the abelian exactness axioms."
+    related_tags:
+      - "abelian-category"
+    parents: []
+    merged_into: null
+  - id: "spectral-sequence"
+    name: "Spectral sequence"
+    aliases: []
+    description: "Successive pages of differential objects converging to filtered information."
+    related_tags:
+      - "spectral-sequence"
+    parents: []
+    merged_into: null

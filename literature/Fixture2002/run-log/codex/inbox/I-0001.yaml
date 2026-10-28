@@ -1,0 +1,103 @@
+id: "I-0001"
+provider: "local"
+kind: "issue"
+attention: "advisory"
+conversation: false
+status: "open"
+labels:
+  - "agent-ready"
+body: "Fixture2002 regression fixture isolation needs repair\n\nmake test exited 2: 10 failed, 337 passed,
+  16 skipped. Failures include Fixture2002 mixed into older compiled goldens without its declarations/foundation
+  lookups, test copies lacking trusted review policy, a smoke parser requiring ## Theorem headings while
+  Fixture2002 uses bold labels, and a maintenance test seeing an ancestor Git baseline. Repairs are outside
+  STMT.4 write scope. Frontend tests were not reached; make site passed with an ESLint deprecation notice.
+  Python tests also emitted a Starlette/httpx deprecation notice."
+scope:
+  projects:
+    - "HomAlg"
+  blueprint_nodes:
+    - "Fixture2002.Thm_2"
+audience: "horizon"
+author: "horizon"
+owner_task: ""
+read_by:
+  - "Fixture2002.PROOF.2"
+source_ref: null
+created_at: "2026-10-28T05:12:51.103682+00:00"
+updated_at: "2026-10-28T05:32:40.972948+00:00"
+comments:
+  - id: "C-0001"
+    item: "I-0001"
+    author: "horizon"
+    at: "2026-10-28T05:32:40.972272+00:00"
+    provenance:
+      run: "0002"
+      session: "0002-horizon-Fixture2002.PROOF.2"
+      role: "horizon"
+      round: "0"
+      rounds: "1"
+      task: "Fixture2002.PROOF.2"
+      task_title: "Fixture2002 PROOF 2"
+      projects: "HomAlg"
+    body: "PROOF.2 rerun: make test exits 2 with 11 failed, 336 passed, 16 skipped; frontend checks are
+      not reached. The additional benchmark failure is test_recursive_cte_caps_unique_nodes_and_preserves_cycles:
+      template_index includes Fixture2002 but its export fixture omits Fixture2002.mul_one. Existing isolation/review-policy/source-heading/ancestor-Git
+      failures persist. make site passes; ESLint and Starlette/httpx deprecations remain."
+metadata:
+  provenance:
+    run: "0001"
+    session: "0002-horizon-Fixture2002.STMT.4"
+    role: "horizon"
+    round: "0"
+    rounds: "1"
+    task: "Fixture2002.STMT.4"
+    task_title: "Fixture2002 STMT 2"
+    projects: "HomAlg"
+  read_by:
+    - "Fixture2002.PROOF.2"
+  history:
+    - at: "2026-10-28T05:12:51.104980+00:00"
+      actor: "horizon"
+      field: "created"
+      from: ""
+      to: "open"
+      note: "opened"
+      provenance:
+        run: "0001"
+        session: "0002-horizon-Fixture2002.STMT.4"
+        role: "horizon"
+        round: "0"
+        rounds: "1"
+        task: "Fixture2002.STMT.4"
+        task_title: "Fixture2002 STMT 2"
+        projects: "HomAlg"
+    - at: "2026-10-28T05:13:37.050849+00:00"
+      actor: "horizon"
+      field: "read_by"
+      from: ""
+      to: "read"
+      note: ""
+      provenance:
+        run: "0001"
+        session: "0002-horizon-Fixture2002.STMT.4"
+        role: "horizon"
+        round: "0"
+        rounds: "1"
+        task: "Fixture2002.STMT.4"
+        task_title: "Fixture2002 STMT 2"
+        projects: "HomAlg"
+    - at: "2026-10-28T05:25:18.121239+00:00"
+      actor: "horizon"
+      field: "read_by"
+      from: ""
+      to: "read"
+      note: ""
+      provenance:
+        run: "0002"
+        session: "0002-horizon-Fixture2002.PROOF.2"
+        role: "horizon"
+        round: "0"
+        rounds: "1"
+        task: "Fixture2002.PROOF.2"
+        task_title: "Fixture2002 PROOF 2"
+        projects: "HomAlg"
