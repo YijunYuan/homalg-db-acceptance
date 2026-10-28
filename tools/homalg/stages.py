@@ -14,7 +14,7 @@ from homalg.schemas import load_yaml
 from homalg.transcription import status as transcription_status
 from homalg.validate import validate_repo
 
-DEFINITION_KINDS = {"definition", "construction", "notation", "axiom"}
+DEFINITION_KINDS = {"definition", "construction", "notation", "axiom", "remark", "conjecture"}
 
 
 def graph_comments(repo: Path, key: str | None = None) -> dict[str, list[dict[str, Any]]]:

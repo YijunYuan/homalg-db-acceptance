@@ -55,3 +55,25 @@ def test_disputed_statement_outcomes(repo: Path, monkeypatch, stage: str, case: 
         assert any("fresh main declarations" in failure for failure in result["failures"])
     elif case == "invalid":
         assert any("invalid evidence" in failure for failure in result["failures"])
+
+
+@pytest.mark.parametrize("kind", ["remark", "conjecture", "theorem"])
+def test_dag_definition_like_items_need_a_statement(repo: Path, monkeypatch, kind: str) -> None:
+    """Remarks/conjectures need no invented proof; theorem proof text remains mandatory."""
+    (repo / "build").mkdir()
+    shutil.copyfile(
+        ROOT / "tools/tests/golden/fixture-export.json", repo / "build/lean-export.json"
+    )
+    state = copy.deepcopy(document_state(repo, "Fixture2000"))
+    node = next(item for item in state["nodes"] if item["id"] == "Fixture2000.Def_1")
+    node["authored"]["kind"] = kind
+    monkeypatch.setattr(stages, "document_state", lambda *_: state)
+    record = {
+        "id": "DAG.1",
+        "metadata": {"homalg": {"doc": "Fixture2000", "stage": "DAG"}},
+        "write_set": {"files": ["HomAlg/Fixture2000/Def_1.lean"]},
+    }
+    result = stages.evaluate(repo, record, refresh_exports=False)
+    assert result["complete"] is (kind != "theorem")
+    if kind == "theorem":
+        assert any("Proof has not been transcribed" in failure for failure in result["failures"])
