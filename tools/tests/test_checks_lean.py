@@ -67,6 +67,41 @@ def test_mathlib_bypass_statement_proof_and_missing_lookup(ctx: Context) -> None
     assert not RULES["mathlib-decls-exist"](ctx)
 
 
+def test_registered_document_defers_foundations_until_a_node_exists(ctx: Context) -> None:
+    document = copy.deepcopy(ctx.docs["Fixture2000"])
+    document["doc_key"] = "Registered2003"
+    document["foundations"] = [{"mathlib": ["Unloaded.Foundation"]}]
+    ctx.docs["Registered2003"] = document
+    ctx.raw["external_constants"]["Unloaded.Foundation"] = {"exists": False, "module": None}
+    assert not RULES["mathlib-decls-exist"](ctx)
+    first = copy.deepcopy(ctx.valid_headers[PRIMARY])
+    first.metadata["doc"] = "Registered2003"
+    ctx.all_headers["HomAlg/Registered2003/Thm_1.lean"] = first
+    findings = RULES["mathlib-decls-exist"](ctx)
+    assert len(findings) == 1
+    assert findings[0].file == "literature/Registered2003/document.yaml"
+    assert "Unloaded.Foundation" in findings[0].message
+
+
+def test_registration_only_foundation_coverage_is_explicit(repo: Path) -> None:
+    from homalg.schemas import load_yaml
+    from homalg.validate import validate_repo
+
+    document = load_yaml((repo / "literature/Fixture2000/document.yaml").read_text())
+    document["doc_key"] = "Registered2003"
+    document["foundations"][0]["mathlib"] = ["Unloaded.Foundation"]
+    destination = repo / "literature/Registered2003"
+    destination.mkdir()
+    (destination / "document.yaml").write_text(json.dumps(document))
+    raw = json.loads(GOLDEN.read_text())
+    raw["external_constants"]["Unloaded.Foundation"] = {"exists": False, "module": None}
+    findings, skipped, _ = validate_repo(
+        repo, only=("mathlib-decls-exist",), export=raw, no_build=True
+    )
+    assert not findings
+    assert "mathlib-decls-exist:Registered2003:no-node-modules" in skipped
+
+
 def test_packaging_and_kind_detection(ctx: Context) -> None:
     declaration = primary(ctx)
     declaration["packaged_fields"] = [

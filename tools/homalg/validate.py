@@ -405,6 +405,12 @@ def validate_repo(
     findings = [item for item in ctx.preloaded if item.rule in active]
     for name in sorted(active):
         findings.extend(RULES[name](ctx))
+    if "mathlib-decls-exist" in active:
+        for key, document in ctx.docs.items():
+            if document["foundations"] and not any(
+                header.metadata["doc"] == key for header in ctx.all_headers.values()
+            ):
+                skipped.add(f"mathlib-decls-exist:{key}:no-node-modules")
     # A loader and a rule may report the same schema issue; emit it once.
     findings = list(dict.fromkeys(findings))
     findings.sort(key=lambda item: (item.file, item.line or 0, item.rule, item.message))

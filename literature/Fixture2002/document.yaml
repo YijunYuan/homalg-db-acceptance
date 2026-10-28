@@ -1,0 +1,13 @@
+{"schema_version": 1, "doc_key": "Fixture2002", "type": "synthetic", "title": "Two elementary arithmetic
+identities", "authors": ["family": "HomAlgDB acceptance authors"], "year": 2002, "language": "en", "structure": [
+   {"chapter": "1", "title": "Addition", "pages": {"first": 1, "last": 1}}, {"chapter": "2", "title": "Multiplication",
+"pages": {"first": 2, "last": 2}}], "foundations": [{"notion": "Natural numbers and their recursive addition
+and multiplication", "mathlib": ["Nat", "Nat.add_zero", "Nat.mul_zero", "Nat.mul_succ", "Nat.zero_add"],
+"justification": "The synthetic source explicitly treats the ordinary natural numbers and recursive arithmetic
+as background.", "status": "confirmed", "evidence": "docs/fixtures/Fixture2002.md, page 1, Background.",
+confirmation: {kind: "agent", by: "codex-root", status: "satisfactory", on: "2026-10-28", session: "root-fixture2002-foundation-independent",
+author_session: "schema-taxonomy-fixture2002-setup", content_sha256: "92cc73b8ff8b01d78be218610efc9ddacc6912675a11634422b655d76fb3ba57"}}],
+"item_kinds": ["theorem"], "notes": "Project-authored synthetic cold-start acceptance only. Not a gold
+fixture or a research article. The two engines receive only repository instructions and this source.",
+early_review: {kind: "agent", by: "codex-root", status: "satisfactory", on: "2026-10-28", session: "root-fixture2002-early-independent",
+author_session: "schema-taxonomy-fixture2002-setup"}}

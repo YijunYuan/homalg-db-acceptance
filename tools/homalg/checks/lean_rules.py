@@ -279,6 +279,10 @@ def mathlib_decls_exist(ctx: Context) -> list[Finding]:
                     )
                 )
     for key, document in ctx.docs.items():
+        # Registration intentionally publishes only document/claim metadata. Its
+        # foundation imports do not exist until a first node module is authored.
+        if not any(header.metadata["doc"] == key for header in ctx.all_headers.values()):
+            continue
         references.extend(
             (f"literature/{key}/document.yaml", name)
             for entry in document["foundations"]

@@ -31,7 +31,9 @@ that the main validator can call through its PR options.
 `deploy.yml` validates and builds full data on pushes to `main`, daily at 03:17 UTC,
 and by manual dispatch. It saves only `.lake/build` immediately after Lean's build,
 checks generated-data freshness and size budgets, then deploys `site/dist` through
-`github-pages`. A failed build leaves the previous site online. Deployments are
+`github-pages`. The Vite build uses the repository's Pages path (`/REPO/`, or `/`
+for an account site), so JavaScript, styles and data resolve beneath the deployed
+project URL. A failed build leaves the previous site online. Deployments are
 serialized without cancelling an earlier deployment. `release-data.yml` builds
 a weekly validated snapshot and attaches the data, LICENSE, LICENSE-DATA and
 NOTICE to a dated GitHub Release.
@@ -92,6 +94,13 @@ node paths, document metadata, and append-only taxonomy/relationship paths.
 Those exemptions are checked by the metadata and collaboration policy commands. Personal repositories permit the repository administrator to
 bypass in pull requests, as required to avoid blocking the sole owner's own PRs.
 Add a second maintainer for meaningful independent code-owner review.
+
+A registration-only document has no Lean node imports yet. Compiled existence
+checks for its foundation names are deferred and explicitly reported as
+`mathlib-decls-exist:DOC:no-node-modules` in skipped coverage. The first node
+restores strict compiled lookup checks; a misspelt or unavailable foundation then
+fails validation. Metadata schema and review-provenance checks remain active
+during registration.
 
 Remote acceptance must be exercised in a test repository: a contributor's
 infrastructure PR must require owner review, an eligible formalization PR must
