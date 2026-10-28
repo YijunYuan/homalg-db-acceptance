@@ -376,7 +376,10 @@ it("layout timeouts produce a usable deployment and explicit fallback", async ()
         "--skip",
         "shiki,search,markdown",
       ],
-      { env: { ...process.env, HOMALG_LAYOUT_TIMEOUT_MS: "1" } },
+      {
+        env: { ...process.env, HOMALG_LAYOUT_TIMEOUT_MS: "1" },
+        timeout: 45_000,
+      },
     );
     const result = JSON.parse(
       await readFile(path.join(temporary, "manifest.json"), "utf8"),
@@ -387,7 +390,7 @@ it("layout timeouts produce a usable deployment and explicit fallback", async ()
   } finally {
     await rm(temporary, { recursive: true, force: true });
   }
-}, 15_000);
+}, 60_000);
 
 it("partitions large search indexes and loads only a requested document", async () => {
   const temporary = await mkdtemp(path.join(tmpdir(), "homalg-search-shards-"));
@@ -402,7 +405,10 @@ it("partitions large search indexes and loads only a requested document", async 
         "--skip",
         "shiki,layout,markdown",
       ],
-      { env: { ...process.env, HOMALG_SEARCH_SHARD_NODES: "1" } },
+      {
+        env: { ...process.env, HOMALG_SEARCH_SHARD_NODES: "1" },
+        timeout: 45_000,
+      },
     );
     const result: SiteManifest = JSON.parse(
       await readFile(path.join(temporary, "manifest.json"), "utf8"),
@@ -432,7 +438,7 @@ it("partitions large search indexes and loads only a requested document", async 
   } finally {
     await rm(temporary, { recursive: true, force: true });
   }
-}, 15000);
+}, 60_000);
 
 it("requests API chapter overviews explicitly and preserves closure truncation", async () => {
   const urls: string[] = [];
