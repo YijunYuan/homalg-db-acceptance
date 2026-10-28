@@ -1,0 +1,140 @@
+{
+  "doc_key": "Fixture2002",
+  "generator": {
+    "name": "homalg",
+    "version": "2"
+  },
+  "lean": {
+    "mathlib_rev": "v4.35.0",
+    "toolchain": "leanprover/lean4:v4.35.0"
+  },
+  "nodes": [
+    {
+      "authored": {
+        "concepts": {
+          "defines": [],
+          "uses": []
+        },
+        "decls": [],
+        "deps": {
+          "proof": [],
+          "statement": []
+        },
+        "description_md": "Addition by zero preserves every natural number.",
+        "doc": "Fixture2002",
+        "fidelity": {
+          "status": "faithful"
+        },
+        "id": "Fixture2002.Thm_1",
+        "kind": "theorem",
+        "proof_md": "This is the defining zero equation of addition.",
+        "source": {
+          "chapter": "1",
+          "label": "Theorem 1",
+          "pages": [
+            1
+          ]
+        },
+        "statement_md": "For every natural number n, n + 0 = n.",
+        "tags": [
+          "basic"
+        ],
+        "title": "Addition by zero preserves every natural number."
+      },
+      "derived": {
+        "decl_info": [],
+        "declared_deps": {
+          "proof": [],
+          "statement": []
+        },
+        "deps_diff": {
+          "declared_not_verified": {
+            "proof": [],
+            "statement": []
+          },
+          "verified_not_declared": []
+        },
+        "file": {
+          "lines": 48,
+          "path": "HomAlg/Fixture2002/Thm_1.lean",
+          "sha256": "e9c57dbc950832c2d7990e71a515a90464b627f066f23c71c57040b8b33bbf70"
+        },
+        "imports": {
+          "mathlib": [],
+          "nodes": []
+        },
+        "local_status": "planned",
+        "sorry_count_text": 0,
+        "verified_deps": {
+          "proof": [],
+          "statement": []
+        }
+      },
+      "id": "Fixture2002.Thm_1"
+    },
+    {
+      "authored": {
+        "concepts": {
+          "defines": [],
+          "uses": []
+        },
+        "decls": [],
+        "deps": {
+          "proof": [],
+          "statement": []
+        },
+        "description_md": "Multiplication by one preserves every natural number.",
+        "doc": "Fixture2002",
+        "fidelity": {
+          "status": "faithful"
+        },
+        "id": "Fixture2002.Thm_2",
+        "kind": "theorem",
+        "proof_md": "The recursion equation gives n * 1 = n * 0 + n. The zero multiplication equation gives n * 0 = 0, and zero plus n is n.",
+        "source": {
+          "chapter": "2",
+          "label": "Theorem 2",
+          "pages": [
+            2
+          ]
+        },
+        "statement_md": "For every natural number n, n * 1 = n.",
+        "tags": [
+          "basic"
+        ],
+        "title": "Multiplication by one preserves every natural number."
+      },
+      "derived": {
+        "decl_info": [],
+        "declared_deps": {
+          "proof": [],
+          "statement": []
+        },
+        "deps_diff": {
+          "declared_not_verified": {
+            "proof": [],
+            "statement": []
+          },
+          "verified_not_declared": []
+        },
+        "file": {
+          "lines": 48,
+          "path": "HomAlg/Fixture2002/Thm_2.lean",
+          "sha256": "546b2c0d35476232f799bd8f308dae6c0c12fa73cb4145062949931c3a63a41c"
+        },
+        "imports": {
+          "mathlib": [],
+          "nodes": []
+        },
+        "local_status": "planned",
+        "sorry_count_text": 0,
+        "verified_deps": {
+          "proof": [],
+          "statement": []
+        }
+      },
+      "id": "Fixture2002.Thm_2"
+    }
+  ],
+  "schema_version": 1
+}

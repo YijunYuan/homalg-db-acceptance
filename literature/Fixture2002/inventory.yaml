@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "doc_key": "Fixture2002",
+  "pages": {
+    "0001": {
+      "items": [
+        {
+          "label": "Theorem 1",
+          "disposition": "node",
+          "node": "Fixture2002.Thm_1"
+        }
+      ],
+      "complete": true
+    },
+    "0002": {
+      "items": [
+        {
+          "label": "Theorem 2",
+          "disposition": "node",
+          "node": "Fixture2002.Thm_2"
+        }
+      ],
+      "complete": true
+    }
+  }
+}
