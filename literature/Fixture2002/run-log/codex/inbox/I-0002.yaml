@@ -1,0 +1,86 @@
+id: "I-0002"
+provider: "local"
+kind: "issue"
+attention: "advisory"
+conversation: false
+status: "open"
+labels:
+  - "agent-ready"
+body: "Arithmetic multiplication is rendered as Markdown emphasis\n\nIndependent honesty review observed
+  generated blueprint/src/content.tex rendering the source multiplication equation as n \\emph{ 1 = n
+  } 0 + n. Authored Statement/Proof and Lean docstring are faithful; investigate arithmetic Markdown rendering
+  in a tooling task. Do not repair generated TeX manually."
+scope:
+  projects:
+    - "HomAlg"
+  blueprint_nodes:
+    - "Fixture2002.Thm_2"
+audience: "horizon"
+author: "horizon"
+owner_task: ""
+read_by:
+  - "Fixture2002.STMT.4"
+  - "Fixture2002.PROOF.2"
+source_ref: null
+created_at: "2026-10-28T05:12:51.829810+00:00"
+updated_at: "2026-10-28T05:25:18.566557+00:00"
+comments: []
+metadata:
+  provenance:
+    run: "0001"
+    session: "0002-horizon-Fixture2002.STMT.4"
+    role: "horizon"
+    round: "0"
+    rounds: "1"
+    task: "Fixture2002.STMT.4"
+    task_title: "Fixture2002 STMT 2"
+    projects: "HomAlg"
+  read_by:
+    - "Fixture2002.STMT.4"
+    - "Fixture2002.PROOF.2"
+  history:
+    - at: "2026-10-28T05:12:51.830904+00:00"
+      actor: "horizon"
+      field: "created"
+      from: ""
+      to: "open"
+      note: "opened"
+      provenance:
+        run: "0001"
+        session: "0002-horizon-Fixture2002.STMT.4"
+        role: "horizon"
+        round: "0"
+        rounds: "1"
+        task: "Fixture2002.STMT.4"
+        task_title: "Fixture2002 STMT 2"
+        projects: "HomAlg"
+    - at: "2026-10-28T05:13:38.411292+00:00"
+      actor: "horizon"
+      field: "read_by"
+      from: ""
+      to: "read"
+      note: ""
+      provenance:
+        run: "0001"
+        session: "0002-horizon-Fixture2002.STMT.4"
+        role: "horizon"
+        round: "0"
+        rounds: "1"
+        task: "Fixture2002.STMT.4"
+        task_title: "Fixture2002 STMT 2"
+        projects: "HomAlg"
+    - at: "2026-10-28T05:25:18.567756+00:00"
+      actor: "horizon"
+      field: "read_by"
+      from: ""
+      to: "read"
+      note: ""
+      provenance:
+        run: "0002"
+        session: "0002-horizon-Fixture2002.PROOF.2"
+        role: "horizon"
+        round: "0"
+        rounds: "1"
+        task: "Fixture2002.PROOF.2"
+        task_title: "Fixture2002 PROOF 2"
+        projects: "HomAlg"

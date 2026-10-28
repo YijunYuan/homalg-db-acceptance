@@ -15,7 +15,9 @@
           "defines": [],
           "uses": []
         },
-        "decls": [],
+        "decls": [
+          "Fixture2002.add_zero"
+        ],
         "deps": {
           "proof": [],
           "statement": []
@@ -23,10 +25,35 @@
         "description_md": "Addition by zero preserves every natural number.",
         "doc": "Fixture2002",
         "fidelity": {
+          "reviewed": {
+            "author_session": "0002-horizon-Fixture2002.STMT.3",
+            "by": "YijunYuan",
+            "decl_hashes": {
+              "Fixture2002.add_zero": {
+                "meaning_hash": "000000002aea8c3d",
+                "statement_sha256": "1d244f86942aed22ee2e3041150eeef8ff6fd1addb3f22a260469d46ea80b157",
+                "type_hash": "000000002aea8c3d"
+              }
+            },
+            "kind": "agent",
+            "on": "2026-10-28",
+            "session": "0002-horizon-Fixture2002.STMT.3/source-fidelity-reviewer",
+            "status": "satisfactory"
+          },
           "status": "faithful"
         },
         "id": "Fixture2002.Thm_1",
         "kind": "theorem",
+        "mathlib": {
+          "decls": [
+            "Nat.add_zero"
+          ],
+          "relation": "same"
+        },
+        "nl_proof_source": {
+          "follows": "document"
+        },
+        "notes_md": "The source works with the ordinary natural numbers and recursive addition, which\nthe document's confirmed foundation boundary identifies with `Nat` and its\nrecursive `+` (recursion on the second argument). The dictionary is: \"natural\nnumber n\" is `n : Nat`; \"n + 0\" is `n + 0` with the `Nat` addition and the\nnumeral `0 : Nat`; the universal quantifier is the explicit argument `n`. The\nMathlib/core counterpart `Nat.add_zero` has the same statement and is recorded\nunder `mathlib`; it is not used as the statement. The proof follows the source\nroute: \"the defining zero equation of addition\" is the zero-case recursion equation\nof `Nat.add` (`n + 0` unfolds to `n`), so the identity holds by `rfl`. No lemma\nis invoked, matching the document's proof, which cites no other item.",
         "proof_md": "This is the defining zero equation of addition.",
         "source": {
           "chapter": "1",
@@ -42,7 +69,43 @@
         "title": "Addition by zero preserves every natural number."
       },
       "derived": {
-        "decl_info": [],
+        "decl_info": [
+          {
+            "direct_sorry": false,
+            "docstring": "**Theorem 1** (HomAlgDB acceptance authors). For every natural number `n`,\n`n + 0 = n`.\n\nSource proof: this is the defining zero equation of addition. Formally, `n + 0`\nreduces to `n` by the zero equation of the recursive `Nat.add`, so `rfl` closes\nthe goal. ",
+            "hollow": false,
+            "is_prop": true,
+            "kind": "theorem",
+            "line": 41,
+            "meaning_hash": "000000002aea8c3d",
+            "name": "Fixture2002.add_zero",
+            "type": "∀ (n : Nat), Eq.{1} (HAdd.hAdd.{0, 0, 0} n (OfNat.ofNat.{0} 0)) n",
+            "type_hash": "000000002aea8c3d",
+            "type_sha256": "8a935fd5071d4080823a490d0122162f986e909ee4e5e0a9ce099864c37fba19",
+            "type_uses_external": [
+              "Eq",
+              "HAdd.hAdd",
+              "Nat",
+              "OfNat.ofNat",
+              "instAddNat",
+              "instHAdd",
+              "instOfNatNat"
+            ],
+            "type_uses_external_truncated": false,
+            "type_uses_nodes": [],
+            "value_uses_external": [
+              "HAdd.hAdd",
+              "Nat",
+              "OfNat.ofNat",
+              "instAddNat",
+              "instHAdd",
+              "instOfNatNat",
+              "rfl"
+            ],
+            "value_uses_external_truncated": false,
+            "value_uses_nodes": []
+          }
+        ],
         "declared_deps": {
           "proof": [],
           "statement": []
@@ -55,15 +118,15 @@
           "verified_not_declared": []
         },
         "file": {
-          "lines": 48,
+          "lines": 50,
           "path": "HomAlg/Fixture2002/Thm_1.lean",
-          "sha256": "e9c57dbc950832c2d7990e71a515a90464b627f066f23c71c57040b8b33bbf70"
+          "sha256": "47b0addf7898ed2b506110efdadb69f54c214d78d2d3cf063a4155962cee2e41"
         },
         "imports": {
           "mathlib": [],
           "nodes": []
         },
-        "local_status": "planned",
+        "local_status": "proved",
         "sorry_count_text": 0,
         "verified_deps": {
           "proof": [],
@@ -78,7 +141,9 @@
           "defines": [],
           "uses": []
         },
-        "decls": [],
+        "decls": [
+          "Fixture2002.mul_one"
+        ],
         "deps": {
           "proof": [],
           "statement": []
@@ -86,10 +151,32 @@
         "description_md": "Multiplication by one preserves every natural number.",
         "doc": "Fixture2002",
         "fidelity": {
+          "reviewed": {
+            "author_session": "0002-horizon-Fixture2002.STMT.4:/root/statement_writer",
+            "by": "YijunYuan",
+            "decl_hashes": {
+              "Fixture2002.mul_one": {
+                "meaning_hash": "0000000050a55181",
+                "statement_sha256": "563a3b3cbcee1bcfeeeccb68ce32bed3be064f2e8e2bd882c088d596c7a7fe6d",
+                "type_hash": "0000000050a55181"
+              }
+            },
+            "kind": "agent",
+            "on": "2026-10-28",
+            "session": "0002-horizon-Fixture2002.STMT.4:/root/source_review",
+            "status": "satisfactory"
+          },
           "status": "faithful"
         },
         "id": "Fixture2002.Thm_2",
         "kind": "theorem",
+        "mathlib": {
+          "decls": [
+            "Nat.mul_one"
+          ],
+          "note": "The counterpart is recorded only as metadata; the source proof uses the recursive multiplication equations and zero addition.",
+          "relation": "same"
+        },
         "proof_md": "The recursion equation gives n * 1 = n * 0 + n. The zero multiplication equation gives n * 0 = 0, and zero plus n is n.",
         "source": {
           "chapter": "2",
@@ -105,7 +192,52 @@
         "title": "Multiplication by one preserves every natural number."
       },
       "derived": {
-        "decl_info": [],
+        "decl_info": [
+          {
+            "direct_sorry": false,
+            "docstring": "**Theorem 2** (HomAlgDB acceptance authors). For every natural number n, n * 1 = n.\n\nSource: `docs/fixtures/Fixture2002.md`, page 2.\n\nProof. The recursion equation gives n * 1 = n * 0 + n. The zero multiplication\nequation gives n * 0 = 0, and zero plus n is n.\n",
+            "hollow": false,
+            "is_prop": true,
+            "kind": "theorem",
+            "line": 29,
+            "meaning_hash": "0000000050a55181",
+            "name": "Fixture2002.mul_one",
+            "type": "∀ (n : Nat), Eq.{1} (HMul.hMul.{0, 0, 0} n (OfNat.ofNat.{0} 1)) n",
+            "type_hash": "0000000050a55181",
+            "type_sha256": "268523be2d3e8c5df662fc7ace68dde3bb3bb485123fe8a86466ff826a0ef868",
+            "type_uses_external": [
+              "Eq",
+              "HMul.hMul",
+              "Nat",
+              "OfNat.ofNat",
+              "instHMul",
+              "instMulNat",
+              "instOfNatNat"
+            ],
+            "type_uses_external_truncated": false,
+            "type_uses_nodes": [],
+            "value_uses_external": [
+              "Eq",
+              "HAdd.hAdd",
+              "HMul.hMul",
+              "Nat",
+              "Nat.mul_succ",
+              "Nat.mul_zero",
+              "Nat.zero_add",
+              "OfNat.ofNat",
+              "Trans.trans",
+              "congrArg",
+              "instAddNat",
+              "instHAdd",
+              "instHMul",
+              "instMulNat",
+              "instOfNatNat",
+              "instTransEq"
+            ],
+            "value_uses_external_truncated": false,
+            "value_uses_nodes": []
+          }
+        ],
         "declared_deps": {
           "proof": [],
           "statement": []
@@ -118,15 +250,15 @@
           "verified_not_declared": []
         },
         "file": {
-          "lines": 48,
+          "lines": 42,
           "path": "HomAlg/Fixture2002/Thm_2.lean",
-          "sha256": "546b2c0d35476232f799bd8f308dae6c0c12fa73cb4145062949931c3a63a41c"
+          "sha256": "617e2cc127f05b1b2e5339d1db10f894796f4d787c1d433a14a61aeaeeb4ced3"
         },
         "imports": {
           "mathlib": [],
           "nodes": []
         },
-        "local_status": "planned",
+        "local_status": "proved",
         "sorry_count_text": 0,
         "verified_deps": {
           "proof": [],

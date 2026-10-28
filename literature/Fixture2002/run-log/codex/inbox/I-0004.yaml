@@ -1,0 +1,30 @@
+id: "I-0004"
+provider: "local"
+kind: "issue"
+attention: "advisory"
+conversation: false
+status: "open"
+labels:
+  - "agent-ready"
+body: "[homalg:claim-owner:Fixture2002]\n\nSkipped status/Fixture2002: the cached contributor no longer
+  holds an active claim on origin/main"
+scope: {}
+audience: "human"
+author: "homalg"
+owner_task: "Fixture2002.CITED.1"
+read_by: []
+source_ref: null
+created_at: "2026-10-28T05:19:00.375059+00:00"
+updated_at: "2026-10-28T05:19:00.375068+00:00"
+comments: []
+metadata:
+  provenance:
+    task: "Fixture2002.STMT.4"
+  owner_task: "Fixture2002.CITED.1"
+  history:
+    - at: "2026-10-28T05:19:00.375919+00:00"
+      actor: "homalg"
+      field: "created"
+      from: ""
+      to: "open"
+      note: "opened"

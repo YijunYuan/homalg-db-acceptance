@@ -1,329 +1,329 @@
 schema_version: 1
 tags:
-- id: chain-complex
-  label: Chain complex
-  parent: null
-- id: cochain-complex
-  label: Cochain complex
-  parent: chain-complex
-- id: double-complex
-  label: Double complex
-  parent: chain-complex
-- id: total-complex
-  label: Total complex
-  parent: chain-complex
-- id: homology
-  label: Homology
-  parent: null
-- id: cohomology
-  label: Cohomology
-  parent: null
-- id: exact-sequence
-  label: Exact sequence
-  parent: null
-- id: short-exact-sequence
-  label: Short exact sequence
-  parent: exact-sequence
-- id: long-exact-sequence
-  label: Long exact sequence
-  parent: exact-sequence
-- id: chain-map
-  label: Chain map
-  parent: null
-- id: chain-homotopy
-  label: Chain homotopy
-  parent: null
-- id: quasi-isomorphism
-  label: Quasi isomorphism
-  parent: null
-- id: mapping-cone
-  label: Mapping cone
-  parent: null
-- id: mapping-cylinder
-  label: Mapping cylinder
-  parent: null
-- id: bicomplex
-  label: Bicomplex
-  parent: double-complex
-- id: simplicial-object
-  label: Simplicial object
-  parent: null
-- id: cosimplicial-object
-  label: Cosimplicial object
-  parent: null
-- id: module
-  label: Module
-  parent: null
-- id: projective-module
-  label: Projective module
-  parent: module
-- id: injective-module
-  label: Injective module
-  parent: module
-- id: flat-module
-  label: Flat module
-  parent: module
-- id: free-module
-  label: Free module
-  parent: module
-- id: abelian-category
-  label: Abelian category
-  parent: null
-- id: additive-category
-  label: Additive category
-  parent: null
-- id: exact-category
-  label: Exact category
-  parent: null
-- id: grothendieck-category
-  label: Grothendieck category
-  parent: null
-- id: enough-projectives
-  label: Enough projectives
-  parent: null
-- id: enough-injectives
-  label: Enough injectives
-  parent: null
-- id: generator
-  label: Generator
-  parent: null
-- id: cogenerator
-  label: Cogenerator
-  parent: null
-- id: functor-category
-  label: Functor category
-  parent: null
-- id: resolution
-  label: Resolution
-  parent: null
-- id: projective-resolution
-  label: Projective resolution
-  parent: resolution
-- id: injective-resolution
-  label: Injective resolution
-  parent: resolution
-- id: flat-resolution
-  label: Flat resolution
-  parent: resolution
-- id: derived-functor
-  label: Derived functor
-  parent: null
-- id: left-derived-functor
-  label: Left derived functor
-  parent: derived-functor
-- id: right-derived-functor
-  label: Right derived functor
-  parent: derived-functor
-- id: satellite
-  label: Satellite
-  parent: null
-- id: delta-functor
-  label: Delta functor
-  parent: null
-- id: universal-delta-functor
-  label: Universal delta functor
-  parent: delta-functor
-- id: effaceable
-  label: Effaceable
-  parent: null
-- id: ext
-  label: Ext
-  parent: derived-functor
-- id: tor
-  label: Tor
-  parent: derived-functor
-- id: balancing
-  label: Balancing
-  parent: null
-- id: dimension-shifting
-  label: Dimension shifting
-  parent: null
-- id: horseshoe-lemma
-  label: Horseshoe lemma
-  parent: null
-- id: comparison-theorem
-  label: Comparison theorem
-  parent: null
-- id: snake-lemma
-  label: Snake lemma
-  parent: null
-- id: five-lemma
-  label: Five lemma
-  parent: null
-- id: nine-lemma
-  label: Nine lemma
-  parent: null
-- id: diagram-chase
-  label: Diagram chase
-  parent: null
-- id: splitting-lemma
-  label: Splitting lemma
-  parent: null
-- id: acyclic-assembly
-  label: Acyclic assembly
-  parent: null
-- id: kunneth
-  label: Kunneth formula
-  parent: null
-- id: universal-coefficient
-  label: Universal coefficient
-  parent: null
-- id: adjoint-functor
-  label: Adjoint functor
-  parent: null
-- id: limits-colimits
-  label: Limits and colimits
-  parent: null
-- id: mittag-leffler
-  label: Mittag leffler
-  parent: null
-- id: lim1
-  label: First derived inverse limit
-  parent: null
-- id: projective-dimension
-  label: Projective dimension
-  parent: null
-- id: injective-dimension
-  label: Injective dimension
-  parent: null
-- id: global-dimension
-  label: Global dimension
-  parent: null
-- id: flat-dimension
-  label: Flat dimension
-  parent: null
-- id: tor-dimension
-  label: Tor dimension
-  parent: null
-- id: regular-ring
-  label: Regular ring
-  parent: null
-- id: koszul-complex
-  label: Koszul complex
-  parent: null
-- id: local-cohomology
-  label: Local cohomology
-  parent: null
-- id: depth
-  label: Depth
-  parent: null
-- id: spectral-sequence
-  label: Spectral sequence
-  parent: null
-- id: filtration
-  label: Filtration
-  parent: null
-- id: exact-couple
-  label: Exact couple
-  parent: null
-- id: grothendieck-spectral-sequence
-  label: Grothendieck spectral sequence
-  parent: spectral-sequence
-- id: lyndon-hochschild-serre
-  label: Lyndon-Hochschild-Serre spectral sequence
-  parent: spectral-sequence
-- id: cartan-eilenberg-resolution
-  label: Cartan eilenberg resolution
-  parent: null
-- id: hypercohomology
-  label: Hypercohomology
-  parent: null
-- id: group-cohomology
-  label: Group cohomology
-  parent: cohomology
-- id: group-homology
-  label: Group homology
-  parent: homology
-- id: lie-algebra-cohomology
-  label: Lie algebra cohomology
-  parent: cohomology
-- id: hochschild-homology
-  label: Hochschild homology
-  parent: homology
-- id: hochschild-cohomology
-  label: Hochschild cohomology
-  parent: cohomology
-- id: cyclic-homology
-  label: Cyclic homology
-  parent: homology
-- id: bar-resolution
-  label: Bar resolution
-  parent: null
-- id: standard-complex
-  label: Standard complex
-  parent: null
-- id: separable-algebra
-  label: Separable algebra
-  parent: null
-- id: semisimple-algebra
-  label: Semisimple algebra
-  parent: null
-- id: radical
-  label: Radical
-  parent: null
-- id: algebra-extension
-  label: Algebra extension
-  parent: null
-- id: singular-extension
-  label: Singular extension
-  parent: algebra-extension
-- id: segregated-extension
-  label: Segregated extension
-  parent: algebra-extension
-- id: derivation
-  label: Derivation
-  parent: null
-- id: wedderburn-principal-theorem
-  label: Wedderburn principal theorem
-  parent: null
-- id: sheaf-cohomology
-  label: Sheaf cohomology
-  parent: cohomology
-- id: cech-cohomology
-  label: Cech cohomology
-  parent: sheaf-cohomology
-- id: flasque-sheaf
-  label: Flasque sheaf
-  parent: sheaf-cohomology
-- id: injective-sheaf
-  label: Injective sheaf
-  parent: sheaf-cohomology
-- id: derived-category
-  label: Derived category
-  parent: null
-- id: triangulated-category
-  label: Triangulated category
-  parent: null
-- id: localization
-  label: Localization
-  parent: null
-- id: homotopy-category
-  label: Homotopy category
-  parent: null
-- id: t-structure
-  label: t-structure
-  parent: null
-- id: dg-category
-  label: Differential graded category
-  parent: null
-- id: model-category
-  label: Model category
-  parent: null
-- id: basic
-  label: Basic/foundational item
-  parent: null
-- id: technical
-  label: Technical lemma
-  parent: null
-- id: bridge
-  label: Bridge
-  parent: null
-- id: historical
-  label: Historical
-  parent: null
-- id: notation
-  label: Notation
-  parent: null
-- id: erratum
-  label: Erratum
-  parent: null
+  - id: "chain-complex"
+    label: "Chain complex"
+    parent: null
+  - id: "cochain-complex"
+    label: "Cochain complex"
+    parent: "chain-complex"
+  - id: "double-complex"
+    label: "Double complex"
+    parent: "chain-complex"
+  - id: "total-complex"
+    label: "Total complex"
+    parent: "chain-complex"
+  - id: "homology"
+    label: "Homology"
+    parent: null
+  - id: "cohomology"
+    label: "Cohomology"
+    parent: null
+  - id: "exact-sequence"
+    label: "Exact sequence"
+    parent: null
+  - id: "short-exact-sequence"
+    label: "Short exact sequence"
+    parent: "exact-sequence"
+  - id: "long-exact-sequence"
+    label: "Long exact sequence"
+    parent: "exact-sequence"
+  - id: "chain-map"
+    label: "Chain map"
+    parent: null
+  - id: "chain-homotopy"
+    label: "Chain homotopy"
+    parent: null
+  - id: "quasi-isomorphism"
+    label: "Quasi isomorphism"
+    parent: null
+  - id: "mapping-cone"
+    label: "Mapping cone"
+    parent: null
+  - id: "mapping-cylinder"
+    label: "Mapping cylinder"
+    parent: null
+  - id: "bicomplex"
+    label: "Bicomplex"
+    parent: "double-complex"
+  - id: "simplicial-object"
+    label: "Simplicial object"
+    parent: null
+  - id: "cosimplicial-object"
+    label: "Cosimplicial object"
+    parent: null
+  - id: "module"
+    label: "Module"
+    parent: null
+  - id: "projective-module"
+    label: "Projective module"
+    parent: "module"
+  - id: "injective-module"
+    label: "Injective module"
+    parent: "module"
+  - id: "flat-module"
+    label: "Flat module"
+    parent: "module"
+  - id: "free-module"
+    label: "Free module"
+    parent: "module"
+  - id: "abelian-category"
+    label: "Abelian category"
+    parent: null
+  - id: "additive-category"
+    label: "Additive category"
+    parent: null
+  - id: "exact-category"
+    label: "Exact category"
+    parent: null
+  - id: "grothendieck-category"
+    label: "Grothendieck category"
+    parent: null
+  - id: "enough-projectives"
+    label: "Enough projectives"
+    parent: null
+  - id: "enough-injectives"
+    label: "Enough injectives"
+    parent: null
+  - id: "generator"
+    label: "Generator"
+    parent: null
+  - id: "cogenerator"
+    label: "Cogenerator"
+    parent: null
+  - id: "functor-category"
+    label: "Functor category"
+    parent: null
+  - id: "resolution"
+    label: "Resolution"
+    parent: null
+  - id: "projective-resolution"
+    label: "Projective resolution"
+    parent: "resolution"
+  - id: "injective-resolution"
+    label: "Injective resolution"
+    parent: "resolution"
+  - id: "flat-resolution"
+    label: "Flat resolution"
+    parent: "resolution"
+  - id: "derived-functor"
+    label: "Derived functor"
+    parent: null
+  - id: "left-derived-functor"
+    label: "Left derived functor"
+    parent: "derived-functor"
+  - id: "right-derived-functor"
+    label: "Right derived functor"
+    parent: "derived-functor"
+  - id: "satellite"
+    label: "Satellite"
+    parent: null
+  - id: "delta-functor"
+    label: "Delta functor"
+    parent: null
+  - id: "universal-delta-functor"
+    label: "Universal delta functor"
+    parent: "delta-functor"
+  - id: "effaceable"
+    label: "Effaceable"
+    parent: null
+  - id: "ext"
+    label: "Ext"
+    parent: "derived-functor"
+  - id: "tor"
+    label: "Tor"
+    parent: "derived-functor"
+  - id: "balancing"
+    label: "Balancing"
+    parent: null
+  - id: "dimension-shifting"
+    label: "Dimension shifting"
+    parent: null
+  - id: "horseshoe-lemma"
+    label: "Horseshoe lemma"
+    parent: null
+  - id: "comparison-theorem"
+    label: "Comparison theorem"
+    parent: null
+  - id: "snake-lemma"
+    label: "Snake lemma"
+    parent: null
+  - id: "five-lemma"
+    label: "Five lemma"
+    parent: null
+  - id: "nine-lemma"
+    label: "Nine lemma"
+    parent: null
+  - id: "diagram-chase"
+    label: "Diagram chase"
+    parent: null
+  - id: "splitting-lemma"
+    label: "Splitting lemma"
+    parent: null
+  - id: "acyclic-assembly"
+    label: "Acyclic assembly"
+    parent: null
+  - id: "kunneth"
+    label: "Kunneth formula"
+    parent: null
+  - id: "universal-coefficient"
+    label: "Universal coefficient"
+    parent: null
+  - id: "adjoint-functor"
+    label: "Adjoint functor"
+    parent: null
+  - id: "limits-colimits"
+    label: "Limits and colimits"
+    parent: null
+  - id: "mittag-leffler"
+    label: "Mittag leffler"
+    parent: null
+  - id: "lim1"
+    label: "First derived inverse limit"
+    parent: null
+  - id: "projective-dimension"
+    label: "Projective dimension"
+    parent: null
+  - id: "injective-dimension"
+    label: "Injective dimension"
+    parent: null
+  - id: "global-dimension"
+    label: "Global dimension"
+    parent: null
+  - id: "flat-dimension"
+    label: "Flat dimension"
+    parent: null
+  - id: "tor-dimension"
+    label: "Tor dimension"
+    parent: null
+  - id: "regular-ring"
+    label: "Regular ring"
+    parent: null
+  - id: "koszul-complex"
+    label: "Koszul complex"
+    parent: null
+  - id: "local-cohomology"
+    label: "Local cohomology"
+    parent: null
+  - id: "depth"
+    label: "Depth"
+    parent: null
+  - id: "spectral-sequence"
+    label: "Spectral sequence"
+    parent: null
+  - id: "filtration"
+    label: "Filtration"
+    parent: null
+  - id: "exact-couple"
+    label: "Exact couple"
+    parent: null
+  - id: "grothendieck-spectral-sequence"
+    label: "Grothendieck spectral sequence"
+    parent: "spectral-sequence"
+  - id: "lyndon-hochschild-serre"
+    label: "Lyndon-Hochschild-Serre spectral sequence"
+    parent: "spectral-sequence"
+  - id: "cartan-eilenberg-resolution"
+    label: "Cartan eilenberg resolution"
+    parent: null
+  - id: "hypercohomology"
+    label: "Hypercohomology"
+    parent: null
+  - id: "group-cohomology"
+    label: "Group cohomology"
+    parent: "cohomology"
+  - id: "group-homology"
+    label: "Group homology"
+    parent: "homology"
+  - id: "lie-algebra-cohomology"
+    label: "Lie algebra cohomology"
+    parent: "cohomology"
+  - id: "hochschild-homology"
+    label: "Hochschild homology"
+    parent: "homology"
+  - id: "hochschild-cohomology"
+    label: "Hochschild cohomology"
+    parent: "cohomology"
+  - id: "cyclic-homology"
+    label: "Cyclic homology"
+    parent: "homology"
+  - id: "bar-resolution"
+    label: "Bar resolution"
+    parent: null
+  - id: "standard-complex"
+    label: "Standard complex"
+    parent: null
+  - id: "separable-algebra"
+    label: "Separable algebra"
+    parent: null
+  - id: "semisimple-algebra"
+    label: "Semisimple algebra"
+    parent: null
+  - id: "radical"
+    label: "Radical"
+    parent: null
+  - id: "algebra-extension"
+    label: "Algebra extension"
+    parent: null
+  - id: "singular-extension"
+    label: "Singular extension"
+    parent: "algebra-extension"
+  - id: "segregated-extension"
+    label: "Segregated extension"
+    parent: "algebra-extension"
+  - id: "derivation"
+    label: "Derivation"
+    parent: null
+  - id: "wedderburn-principal-theorem"
+    label: "Wedderburn principal theorem"
+    parent: null
+  - id: "sheaf-cohomology"
+    label: "Sheaf cohomology"
+    parent: "cohomology"
+  - id: "cech-cohomology"
+    label: "Cech cohomology"
+    parent: "sheaf-cohomology"
+  - id: "flasque-sheaf"
+    label: "Flasque sheaf"
+    parent: "sheaf-cohomology"
+  - id: "injective-sheaf"
+    label: "Injective sheaf"
+    parent: "sheaf-cohomology"
+  - id: "derived-category"
+    label: "Derived category"
+    parent: null
+  - id: "triangulated-category"
+    label: "Triangulated category"
+    parent: null
+  - id: "localization"
+    label: "Localization"
+    parent: null
+  - id: "homotopy-category"
+    label: "Homotopy category"
+    parent: null
+  - id: "t-structure"
+    label: "t-structure"
+    parent: null
+  - id: "dg-category"
+    label: "Differential graded category"
+    parent: null
+  - id: "model-category"
+    label: "Model category"
+    parent: null
+  - id: "basic"
+    label: "Basic/foundational item"
+    parent: null
+  - id: "technical"
+    label: "Technical lemma"
+    parent: null
+  - id: "bridge"
+    label: "Bridge"
+    parent: null
+  - id: "historical"
+    label: "Historical"
+    parent: null
+  - id: "notation"
+    label: "Notation"
+    parent: null
+  - id: "erratum"
+    label: "Erratum"
+    parent: null
